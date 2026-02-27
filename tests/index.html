@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUKHTANA — The Living Pashtoon Encyclopedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:      #070604;
+  --stone:    #100e0a;
+  --slab:     #181410;
+  --plate:    #211d16;
+  --carved:   #2c261d;
+  --gold:     #c8a84b;
+  --gold2:    #e2c97e;
+  --gold3:    #8a6e28;
+  --copper:   #9b5f2a;
+  --ash:      #c4b49a;
+  --dust:     #7a6e5c;
+  --fog:      #4a4236;
+  --white:    #f5ede0;
+  --danger:   #8b2a2a;
+  --border:   rgba(200,168,75,0.18);
+  --border2:  rgba(200,168,75,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--ink);color:var(--ash);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;mix-blend-mode:overlay}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--stone)}
+::-webkit-scrollbar-thumb{background:var(--gold3)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;position:relative;overflow:hidden;text-align:center}
+.hero-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-geo svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(900px,100vw);height:min(900px,100vw);opacity:0.045;animation:slowSpin 90s linear infinite}
+@keyframes slowSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero::before{content:'';position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(200,168,75,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-pre{font-family:'Cinzel Decorative',serif;font-size:0.6rem;letter-spacing:0.6em;color:var(--gold3);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:riseIn 1.2s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;position:relative}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(4rem,12vw,10rem);font-weight:900;color:var(--gold);line-height:0.9;opacity:0;animation:riseIn 1.4s 0.4s cubic-bezier(0.16,1,0.3,1) forwards;position:relative;text-shadow:0 1px 0 var(--gold3),0 -1px 0 rgba(200,168,75,0.3),0 0 60px rgba(200,168,75,0.15)}
+.hero-pashto{font-family:'Noto Nastaliq Urdu',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--gold2);direction:rtl;margin-top:0.8rem;opacity:0;animation:riseIn 1.4s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;position:relative}
+.hero-sub{font-size:clamp(0.9rem,2vw,1.1rem);color:var(--dust);font-style:italic;letter-spacing:0.05em;margin-top:0.4rem;opacity:0;animation:riseIn 1.4s 0.7s cubic-bezier(0.16,1,0.3,1) forwards;position:relative}
+.hero-rule{display:flex;align-items:center;gap:1rem;width:min(500px,80vw);margin:2.5rem auto;opacity:0;animation:riseIn 1.4s 0.85s cubic-bezier(0.16,1,0.3,1) forwards;position:relative}
+.hero-rule-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold3),transparent)}
+.hero-rule-gem{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+.hero-quote-block{max-width:560px;opacity:0;animation:riseIn 1.4s 1s cubic-bezier(0.16,1,0.3,1) forwards;position:relative;text-align:center}
+.hero-quote-pashto{font-family:'Noto Nastaliq Urdu',serif;font-size:1.1rem;color:var(--ash);direction:rtl;line-height:2;margin-bottom:0.5rem}
+.hero-quote-english{font-size:0.95rem;font-style:italic;color:var(--dust);line-height:1.7}
+.hero-quote-by{margin-top:0.75rem;font-family:'Cinzel Decorative',serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold3)}
+.hero-stats{display:flex;gap:clamp(1.5rem,4vw,4rem);margin-top:3rem;opacity:0;animation:riseIn 1.4s 1.2s cubic-bezier(0.16,1,0.3,1) forwards;position:relative;flex-wrap:wrap;justify-content:center}
+.stat-n{font-family:'Cinzel Decorative',serif;font-size:2rem;color:var(--gold)}
+.stat-l{font-size:0.7rem;letter-spacing:0.2em;color:var(--dust);text-transform:uppercase;margin-top:0.2rem}
+.hero-btns{display:flex;gap:1rem;margin-top:3rem;opacity:0;animation:riseIn 1.4s 1.4s cubic-bezier(0.16,1,0.3,1) forwards;position:relative;flex-wrap:wrap;justify-content:center}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* BUTTONS */
+.btn{font-family:'Cinzel Decorative',serif;font-size:0.65rem;letter-spacing:0.25em;font-weight:700;border:none;cursor:pointer;padding:1rem 2.2rem;transition:all 0.25s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.btn-gold{background:linear-gradient(135deg,var(--gold3) 0%,var(--gold) 50%,var(--gold2) 100%);color:var(--ink)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,168,75,0.35)}
+.btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold3);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.btn-outline:hover{background:rgba(200,168,75,0.08);border-color:var(--gold)}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:500;background:rgba(7,6,4,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(16px)}
+.nav-inner{max-width:1440px;margin:0 auto;display:flex;align-items:stretch}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:0.9rem;font-weight:700;color:var(--gold);padding:0 2rem;display:flex;align-items:center;border-right:1px solid var(--border);white-space:nowrap;letter-spacing:0.05em;flex-shrink:0}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:var(--dust);padding:1.1rem 1.4rem;font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.15em;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0}
+.tab-btn:hover{color:var(--ash)}
+.tab-btn.on{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* LAYOUT */
+.main{max-width:1440px;margin:0 auto;padding:4rem 2rem 6rem}
+.sec{display:none}
+.sec.on{display:block;animation:secIn 0.45s cubic-bezier(0.16,1,0.3,1)}
+@keyframes secIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.sec-head{text-align:center;margin-bottom:4rem}
+.sec-eye{font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.45em;color:var(--gold3);display:block;margin-bottom:1rem}
+.sec-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,4vw,3rem);color:var(--gold);text-shadow:0 1px 0 var(--gold3);margin-bottom:0.75rem;line-height:1.15}
+.sec-desc{font-style:italic;color:var(--dust);font-size:1.05rem;max-width:550px;margin:0 auto;line-height:1.7}
+.orn{display:flex;align-items:center;gap:1rem;margin:3rem 0}
+.orn-l{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.orn-d{width:7px;height:7px;background:var(--gold3);transform:rotate(45deg);flex-shrink:0}
+
+/* TIMELINE */
+.tl-wrap{position:relative;padding-left:2.5rem}
+.tl-wrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--gold3) 5%,var(--gold3) 95%,transparent)}
+.tl-item{position:relative;background:var(--slab);border:1px solid var(--border2);padding:1.5rem 2rem;margin-bottom:1.2rem;cursor:pointer;transition:all 0.25s}
+.tl-item::before{content:'◆';position:absolute;left:-3.2rem;top:1.6rem;font-size:0.55rem;color:var(--gold3);transition:color 0.25s}
+.tl-item:hover{border-color:var(--border);transform:translateX(4px)}
+.tl-item:hover::before{color:var(--gold)}
+.tl-item.expanded{border-color:rgba(200,168,75,0.35)}
+.tl-year{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);margin-bottom:0.4rem}
+.tl-event{font-size:1rem;color:var(--ash);font-weight:600;margin-bottom:0.3rem}
+.tl-sig{font-size:0.9rem;color:var(--dust);font-style:italic}
+.tl-expand{display:none;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border2);font-size:0.95rem;color:var(--dust);line-height:1.85}
+.tl-item.expanded .tl-expand{display:block}
+
+/* CHAT */
+.chat-layout{display:grid;grid-template-columns:1fr 300px;gap:1.5rem;height:72vh;min-height:520px}
+.chat-box{display:flex;flex-direction:column;background:var(--slab);border:1px solid var(--border)}
+.chat-hdr{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border2);flex-shrink:0}
+.chat-avatar{width:44px;height:44px;background:linear-gradient(135deg,var(--gold3),var(--gold));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.chat-persona h3{font-family:'Cinzel Decorative',serif;font-size:0.75rem;color:var(--gold);margin-bottom:0.15rem}
+.chat-persona p{font-size:0.8rem;color:var(--dust);font-style:italic}
+.chat-msgs{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1.2rem;scrollbar-width:thin;scrollbar-color:var(--gold3) transparent}
+.msg{animation:msgIn 0.3s ease;max-width:88%}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{align-self:flex-end}
+.msg-bubble{padding:1rem 1.3rem;font-size:0.95rem;line-height:1.75}
+.msg.ai .msg-bubble{background:var(--plate);border:1px solid var(--border2);clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%);color:var(--ash)}
+.msg.user .msg-bubble{background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);clip-path:polygon(10px 0%,100% 0%,100% 100%,0% 100%,0% 10px);color:var(--ash)}
+.chat-foot{display:flex;gap:0.75rem;padding:1.25rem;border-top:1px solid var(--border2);flex-shrink:0}
+.chat-inp{flex:1;background:var(--plate);border:1px solid var(--border2);color:var(--ash);padding:0.85rem 1.2rem;font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;transition:border-color 0.2s}
+.chat-inp:focus{border-color:var(--gold3)}
+.chat-inp::placeholder{color:var(--fog);font-style:italic}
+.chat-send{background:linear-gradient(135deg,var(--gold3),var(--gold));border:none;color:var(--ink);padding:0.85rem 1.4rem;font-family:'Cinzel Decorative',serif;font-size:0.6rem;letter-spacing:0.1em;font-weight:700;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.2s;flex-shrink:0}
+.chat-send:hover{filter:brightness(1.15)}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed}
+.suggestions{display:flex;flex-direction:column;gap:0.5rem;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold3) transparent}
+.sug-group{margin-bottom:1rem}
+.sug-label{font-family:'Cinzel Decorative',serif;font-size:0.55rem;letter-spacing:0.25em;color:var(--gold3);display:block;margin-bottom:0.5rem}
+.sug-btn{display:block;width:100%;text-align:left;background:var(--slab);border:1px solid var(--border2);color:var(--dust);padding:0.7rem 0.9rem;font-family:'Cormorant Garamond',serif;font-size:0.88rem;line-height:1.4;cursor:pointer;transition:all 0.2s;margin-bottom:0.4rem}
+.sug-btn:hover{color:var(--ash);border-color:var(--border);background:var(--plate)}
+
+/* POETRY */
+.poet-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem}
+.poet-tab{background:var(--slab);border:1px solid var(--border2);padding:1.5rem;cursor:pointer;transition:all 0.25s;text-align:center}
+.poet-tab.on{border-color:var(--gold3);background:var(--plate)}
+.poet-tab:hover{border-color:var(--border)}
+.poet-icon{font-size:2.5rem;display:block;margin-bottom:0.75rem}
+.poet-nm{font-family:'Cinzel Decorative',serif;font-size:0.75rem;color:var(--gold);margin-bottom:0.25rem}
+.poet-yr{font-size:0.8rem;color:var(--dust);font-style:italic}
+.poet-bio-box{background:var(--slab);border:1px solid var(--border2);padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start}
+.poet-big-icon{font-size:4rem}
+.poet-bio-name{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--gold);margin-bottom:0.25rem}
+.poet-bio-dates{font-size:0.85rem;color:var(--dust);margin-bottom:1rem;font-style:italic}
+.poet-bio-text{line-height:1.85;color:var(--ash)}
+.poems-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.poem-card{background:var(--slab);border:1px solid var(--border2);padding:2rem;transition:all 0.25s}
+.poem-card:hover{border-color:var(--border)}
+.poem-nm{font-family:'Cinzel Decorative',serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:1rem}
+.poem-pashto{font-family:'Noto Nastaliq Urdu',serif;direction:rtl;font-size:1rem;line-height:2.2;color:var(--white);background:rgba(200,168,75,0.04);border-right:2px solid var(--gold3);padding:1rem;margin-bottom:1rem}
+.poem-english{font-style:italic;color:var(--dust);line-height:1.9;font-size:0.95rem;margin-bottom:1rem}
+.poem-context{font-size:0.85rem;color:var(--fog);line-height:1.7;padding-top:1rem;border-top:1px solid var(--border2)}
+
+/* PASHTUNWALI */
+.pw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.pw-card{background:var(--slab);border:1px solid var(--border2);padding:1.5rem;cursor:pointer;transition:all 0.25s;text-align:center;position:relative;overflow:hidden}
+.pw-card:hover{border-color:var(--border);transform:translateY(-2px)}
+.pw-card.on{border-color:var(--gold3);background:var(--plate)}
+.pw-num{font-family:'Cinzel Decorative',serif;font-size:2.5rem;color:rgba(200,168,75,0.1);position:absolute;top:-0.5rem;right:0.5rem;pointer-events:none;line-height:1}
+.pw-name{font-family:'Cinzel Decorative',serif;font-size:0.85rem;color:var(--gold);margin-bottom:0.3rem;position:relative}
+.pw-mean{font-style:italic;color:var(--dust);font-size:0.88rem;position:relative}
+.pw-panel{display:none;background:var(--plate);border:1px solid var(--border);padding:2.5rem;margin-top:1.5rem;animation:secIn 0.35s ease}
+.pw-panel.on{display:block}
+.pw-panel-name{font-family:'Cinzel Decorative',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.25rem}
+.pw-panel-mean{font-size:1rem;color:var(--dust);font-style:italic;margin-bottom:1.5rem}
+.pw-panel-desc{line-height:1.9;color:var(--ash);margin-bottom:2rem;font-size:1.05rem}
+.pw-panel-story-label{font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.35em;color:var(--gold3);margin-bottom:1rem}
+.pw-story{color:var(--dust);line-height:1.9;font-size:0.95rem}
+
+/* TRIBES */
+.tribes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.tribe-card{background:var(--slab);border:1px solid var(--border2);padding:1.5rem;cursor:pointer;transition:all 0.25s}
+.tribe-card:hover{border-color:var(--border);transform:translateY(-2px)}
+.tribe-em{font-size:2rem;margin-bottom:0.75rem;display:block}
+.tribe-name{font-family:'Cinzel Decorative',serif;font-size:0.9rem;color:var(--gold);margin-bottom:0.3rem}
+.tribe-region{font-size:0.78rem;color:var(--dust);font-style:italic;margin-bottom:0.6rem}
+.tribe-desc{font-size:0.88rem;color:var(--ash);line-height:1.6}
+.tribe-cta{font-size:0.75rem;color:var(--gold3);margin-top:0.75rem;font-style:italic}
+
+/* TRIBE MODAL */
+.t-modal{display:none;position:fixed;inset:0;background:rgba(4,3,2,0.92);z-index:9000;align-items:center;justify-content:center;padding:2rem}
+.t-modal.on{display:flex}
+.t-modal-box{background:var(--slab);border:1px solid var(--border);max-width:680px;width:100%;max-height:82vh;overflow-y:auto;padding:3rem;position:relative;animation:secIn 0.35s ease;scrollbar-width:thin;scrollbar-color:var(--gold3) transparent}
+.t-modal-close{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:var(--dust);font-size:1.3rem;cursor:pointer;font-family:'Cinzel Decorative',serif;transition:color 0.2s}
+.t-modal-close:hover{color:var(--gold)}
+
+/* IDENTITY */
+.id-layout{display:grid;grid-template-columns:340px 1fr;gap:2.5rem;align-items:start}
+.id-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-label{display:block;font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold3);margin-bottom:0.5rem}
+.form-inp,.form-sel{width:100%;background:var(--slab);border:1px solid var(--border2);color:var(--ash);padding:0.85rem 1.1rem;font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;transition:border-color 0.2s;appearance:none}
+.form-inp:focus,.form-sel:focus{border-color:var(--gold3)}
+.form-inp::placeholder{color:var(--fog);font-style:italic}
+.id-card{background:var(--slab);border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;min-height:380px}
+.id-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(200,168,75,0.06) 0%,transparent 50%),radial-gradient(ellipse at bottom right,rgba(200,168,75,0.04) 0%,transparent 50%);pointer-events:none}
+
+/* ON THIS DAY */
+.today-wrap{max-width:760px;margin:0 auto;text-align:center}
+.today-date-badge{font-family:'Cinzel Decorative',serif;font-size:0.6rem;letter-spacing:0.45em;color:var(--gold3);margin-bottom:2rem;display:block}
+.today-card{background:var(--slab);border:1px solid var(--border);padding:3rem;position:relative;overflow:hidden;text-align:left}
+.today-year-bg{position:absolute;top:-1rem;right:1.5rem;font-family:'Cinzel Decorative',serif;font-size:6rem;color:rgba(200,168,75,0.05);pointer-events:none;line-height:1}
+.today-headline{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--ash);line-height:1.4;margin-bottom:2rem}
+.today-story{color:var(--dust);line-height:1.95;margin-bottom:1.2rem;font-size:1rem}
+.today-sig{background:rgba(200,168,75,0.05);border-left:2px solid var(--gold);padding:1rem 1.5rem;font-style:italic;color:var(--ash);margin-top:1.5rem}
+.today-sig-label{font-family:'Cinzel Decorative',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--gold3);display:block;margin-bottom:0.4rem}
+
+/* LOADER */
+.loader{display:inline-flex;gap:5px;align-items:center}
+.ld{width:6px;height:6px;background:var(--gold3);transform:rotate(45deg);animation:ldp 1.1s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:0.18s}
+.ld:nth-child(3){animation-delay:0.36s}
+@keyframes ldp{0%,100%{opacity:0.3;transform:rotate(45deg) scale(0.7)}50%{opacity:1;transform:rotate(45deg) scale(1.2)}}
+.loading-msg{display:flex;align-items:center;gap:1rem;color:var(--dust);font-style:italic}
+
+/* ORG CHART */
+.org-intro{max-width:800px;margin:0 auto 3rem;text-align:center;line-height:1.8;color:var(--dust)}
+.org-controls{display:flex;gap:1rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+.org-filter-btn{background:var(--slab);border:1px solid var(--border2);color:var(--dust);padding:0.6rem 1.4rem;font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.15em;cursor:pointer;transition:all 0.2s}
+.org-filter-btn:hover,.org-filter-btn.on{border-color:var(--gold3);color:var(--gold);background:var(--plate)}
+.org-chart-wrap{overflow-x:auto;overflow-y:auto;max-height:80vh;padding:2rem;background:var(--slab);border:1px solid var(--border)}
+.org-root{display:flex;flex-direction:column;align-items:center;min-width:1200px}
+.org-tier-label{font-family:'Cinzel Decorative',serif;font-size:0.55rem;letter-spacing:0.35em;color:var(--gold3);margin:1.5rem 0 0.75rem;text-transform:uppercase}
+.org-row{display:flex;gap:1rem;justify-content:center;flex-wrap:nowrap;position:relative;margin-bottom:0.5rem}
+.org-row::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:0;background:var(--gold3)}
+.org-node{background:var(--plate);border:1px solid var(--border2);padding:0.8rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;min-width:130px;max-width:160px}
+.org-node:hover,.org-node.on{border-color:var(--gold3);background:var(--carved)}
+.org-node-em{font-size:1.3rem;display:block;margin-bottom:0.25rem}
+.org-node-name{font-family:'Cinzel Decorative',serif;font-size:0.6rem;color:var(--gold);line-height:1.3;margin-bottom:0.2rem}
+.org-node-sub{font-size:0.7rem;color:var(--dust);font-style:italic;line-height:1.3}
+.org-node.root-node{background:linear-gradient(135deg,var(--carved),var(--plate));border-color:var(--gold3);min-width:180px}
+.org-node.root-node .org-node-name{font-size:0.75rem;color:var(--gold2)}
+.org-connector{width:1px;background:var(--gold3);margin:0 auto;opacity:0.5}
+.org-h-connector{height:1px;background:var(--gold3);opacity:0.3;margin:0 0.5rem}
+.org-detail-panel{background:var(--plate);border:1px solid var(--border);padding:2rem;margin-top:1.5rem;animation:secIn 0.3s ease;display:none}
+.org-detail-panel.on{display:block}
+.org-detail-title{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--gold);margin-bottom:0.25rem}
+.org-detail-sub{font-size:0.85rem;color:var(--dust);font-style:italic;margin-bottom:1.2rem}
+.org-detail-body{color:var(--ash);line-height:1.9;font-size:0.97rem}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--border2);padding:3rem 2rem;text-align:center;color:var(--fog);font-size:0.88rem}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--gold3);margin-bottom:0.5rem}
+.footer-links{display:flex;gap:2rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.footer-links a{color:var(--fog);text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+
+@media(max-width:900px){
+  .chat-layout{grid-template-columns:1fr;height:auto}
+  .chat-box{height:60vh}
+  .suggestions{display:none}
+  .id-layout{grid-template-columns:1fr}
+  .poems-grid{grid-template-columns:1fr}
+  .pw-grid{grid-template-columns:repeat(2,1fr)}
+  .poet-tabs{grid-template-columns:1fr}
+  .poet-bio-box{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .pw-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-geo">
+    <svg viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#C9A84C" stroke-width="0.8">
+        <polygon points="400,30 750,215 750,585 400,770 50,585 50,215"/>
+        <polygon points="400,80 700,245 700,555 400,720 100,555 100,245"/>
+        <polygon points="400,130 650,275 650,525 400,670 150,525 150,275"/>
+        <rect x="170" y="170" width="460" height="460" transform="rotate(0 400 400)"/>
+        <rect x="170" y="170" width="460" height="460" transform="rotate(15 400 400)"/>
+        <rect x="170" y="170" width="460" height="460" transform="rotate(30 400 400)"/>
+        <rect x="200" y="200" width="400" height="400" transform="rotate(45 400 400)"/>
+        <line x1="400" y1="0" x2="400" y2="800"/>
+        <line x1="0" y1="400" x2="800" y2="400"/>
+        <line x1="100" y1="100" x2="700" y2="700"/>
+        <line x1="700" y1="100" x2="100" y2="700"/>
+        <circle cx="400" cy="400" r="320"/><circle cx="400" cy="400" r="240"/>
+        <circle cx="400" cy="400" r="160"/><circle cx="400" cy="400" r="80"/>
+        <circle cx="400" cy="400" r="30"/>
+        <polygon points="400,50 420,80 400,110 380,80"/>
+        <polygon points="750,400 720,420 690,400 720,380"/>
+        <polygon points="400,750 380,720 400,690 420,720"/>
+        <polygon points="50,400 80,380 110,400 80,420"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-pre">پښتانه · Pukhtana · Since 600 BCE</div>
+  <h1 class="hero-title">PUKHTANA</h1>
+  <div class="hero-pashto">د پښتنو ژوندی دائرة المعارف</div>
+  <div class="hero-sub">The Living Pashtoon Encyclopedia — AI-Powered Chatbot · Hardcoded History</div>
+  <div class="hero-rule"><div class="hero-rule-line"></div><div class="hero-rule-gem"></div><div class="hero-rule-line"></div></div>
+  <div class="hero-quote-block">
+    <div class="hero-quote-pashto">که سر ورکوم که سر اخلم — زه پښتون يم ددې ملک</div>
+    <div class="hero-quote-english">"Whether I give my head or take another's — I am a Pashtoon of this land"</div>
+    <div class="hero-quote-by">— Khushal Khan Khattak · Warrior · Chieftain · Poet · 1613–1689</div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-n">50M+</div><div class="stat-l">Pashtoon People</div></div>
+    <div><div class="stat-n">2,500+</div><div class="stat-l">Years of History</div></div>
+    <div><div class="stat-n">60+</div><div class="stat-l">Great Tribes</div></div>
+    <div><div class="stat-n">∞</div><div class="stat-l">Stories to Tell</div></div>
+  </div>
+  <div class="hero-btns">
+    <button class="btn btn-gold" onclick="goTo('timeline')">Explore History</button>
+    <button class="btn btn-outline" onclick="goTo('historian')">Talk to AI Historian</button>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-brand">PUKHTANA</div>
+    <div class="nav-tabs">
+      <button class="tab-btn on" data-tab="timeline" onclick="goTo('timeline')">📜 Timeline</button>
+      <button class="tab-btn" data-tab="historian" onclick="goTo('historian')">🤖 AI Historian</button>
+      <button class="tab-btn" data-tab="identity" onclick="goTo('identity')">🪪 Identity Card</button>
+      <button class="tab-btn" data-tab="poetry" onclick="goTo('poetry')">📖 Poetry</button>
+      <button class="tab-btn" data-tab="pashtunwali" onclick="goTo('pashtunwali')">⚖️ Pashtunwali</button>
+      <button class="tab-btn" data-tab="tribes" onclick="goTo('tribes')">🏔 Tribes</button>
+      <button class="tab-btn" data-tab="orgchart" onclick="goTo('orgchart')">🌳 Tribal Tree</button>
+      <button class="tab-btn" data-tab="today" onclick="goTo('today')">📅 On This Day</button>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- TIMELINE -->
+<section class="sec on" id="sec-timeline">
+  <div class="sec-head">
+    <span class="sec-eye">From Ancient Gandhara to Modern Day</span>
+    <h2 class="sec-title">The Great Timeline</h2>
+    <p class="sec-desc">Click any event to unlock a full historical deep dive — sourced from 2,500 years of Pashtoon memory</p>
+  </div>
+  <div class="tl-wrap" id="tlWrap"></div>
+</section>
+
+<!-- AI HISTORIAN -->
+<section class="sec" id="sec-historian">
+  <div class="sec-head">
+    <span class="sec-eye">Powered by Gemini AI — Backend Required</span>
+    <h2 class="sec-title">The AI Historian</h2>
+    <p class="sec-desc">Chat with Ustaz Ahmad — keeper of 2,500 years of Pashtoon knowledge</p>
+  </div>
+  <div class="chat-layout">
+    <div class="chat-box">
+      <div class="chat-hdr">
+        <div class="chat-avatar">🦅</div>
+        <div class="chat-persona">
+          <h3>Ustaz Ahmad — Pashtoon Historian</h3>
+          <p>Keeper of the mountains' memory · Gemini AI via Backend</p>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="msg ai">
+          <div class="msg-bubble">
+            <strong>Salaam alaykum!</strong> I am Ustaz Ahmad, keeper of Pashtoon history.<br><br>
+            I carry the stories of Ahmad Shah Durrani, the poetry of Rahman Baba, the code of Pashtunwali, and the memory of every battle our people have fought. Ask me anything — our history stretches 2,500 years.<br><br>
+            <em style="color:var(--dust)">د پښتونخواه تاریخ زما سینه کې ژوندی دی.</em>
+          </div>
+        </div>
+      </div>
+      <div class="chat-foot">
+        <input class="chat-inp" id="chatInp" placeholder="Ask about Pashtoon history, warriors, poets, tribes..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" id="sendBtn" onclick="sendChat()">SEND</button>
+      </div>
+    </div>
+    <div class="suggestions">
+      <div class="sug-group">
+        <span class="sug-label">⚔️ Warriors & Battles</span>
+        <button class="sug-btn" onclick="useSug(this)">How did Ahmad Shah Durrani build the Afghan Empire?</button>
+        <button class="sug-btn" onclick="useSug(this)">Tell me about the 3 Anglo-Afghan Wars</button>
+        <button class="sug-btn" onclick="useSug(this)">Who was Mirwais Hotak and why is he a hero?</button>
+        <button class="sug-btn" onclick="useSug(this)">Battle of Panipat 1761 — what happened?</button>
+      </div>
+      <div class="sug-group">
+        <span class="sug-label">📜 Poets & Culture</span>
+        <button class="sug-btn" onclick="useSug(this)">Who was Rahman Baba and why do Pashtoons love him?</button>
+        <button class="sug-btn" onclick="useSug(this)">Tell me about Khushal Khan Khattak</button>
+        <button class="sug-btn" onclick="useSug(this)">What is the Attan dance?</button>
+      </div>
+      <div class="sug-group">
+        <span class="sug-label">🌍 History & Politics</span>
+        <button class="sug-btn" onclick="useSug(this)">What is the Durand Line and why is it controversial?</button>
+        <button class="sug-btn" onclick="useSug(this)">Who was the Frontier Gandhi?</button>
+        <button class="sug-btn" onclick="useSug(this)">Where do Pashtoons originally come from?</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY CARD -->
+<section class="sec" id="sec-identity">
+  <div class="sec-head">
+    <span class="sec-eye">Know Your Roots — Gemini AI via Backend</span>
+    <h2 class="sec-title">Your Pashtoon Identity</h2>
+    <p class="sec-desc">Enter your name and tribe — AI writes your personal ancestral story</p>
+  </div>
+  <div class="id-layout">
+    <div class="id-form">
+      <div>
+        <label class="form-label">Your Name</label>
+        <input class="form-inp" id="idName" type="text" placeholder="e.g. Zubair Khan">
+      </div>
+      <div>
+        <label class="form-label">Your Tribe</label>
+        <input class="form-inp" id="idTribe" type="text" placeholder="e.g. Yusufzai, Afridi, Khattak...">
+      </div>
+      <div>
+        <label class="form-label">Your Region / City</label>
+        <input class="form-inp" id="idRegion" type="text" placeholder="e.g. Peshawar, Swat, Kandahar...">
+      </div>
+      <button class="btn btn-gold" onclick="genIdentity()">GENERATE MY IDENTITY</button>
+      <div style="background:var(--slab);border:1px solid var(--border2);padding:1.5rem;margin-top:0.5rem">
+        <div style="font-family:'Cinzel Decorative',serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold3);margin-bottom:0.75rem">HOW IT WORKS</div>
+        <div style="font-size:0.9rem;line-height:1.75;color:var(--dust)">Gemini AI uses your tribe and region to generate your tribe's history, famous ancestral warriors, your Pashtunwali spirit, and a direct message from your ancestors.</div>
+      </div>
+    </div>
+    <div class="id-card" id="idCard">
+      <div style="text-align:center;padding:3rem;color:var(--dust)">
+        <div style="font-size:3rem;margin-bottom:1rem">🏔</div>
+        <div style="font-family:'Cinzel Decorative',serif;font-size:0.9rem;color:var(--gold3)">Enter your details</div>
+        <div style="margin-top:0.5rem;font-style:italic;font-size:0.9rem">Your ancestral identity will appear here</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POETRY -->
+<section class="sec" id="sec-poetry">
+  <div class="sec-head">
+    <span class="sec-eye">Pashto Literature — The Voice of the Mountains</span>
+    <h2 class="sec-title">The Poets</h2>
+    <p class="sec-desc">Warriors, mystics, and mothers who gave the Pashtoon soul its language</p>
+  </div>
+  <div class="poet-tabs" id="poetTabs"></div>
+  <div id="poetContent"></div>
+</section>
+
+<!-- PASHTUNWALI -->
+<section class="sec" id="sec-pashtunwali">
+  <div class="sec-head">
+    <span class="sec-eye">The Unwritten Code</span>
+    <h2 class="sec-title">Pashtunwali</h2>
+    <p class="sec-desc">Nine pillars of honor, older than any written law — the complete code that governs Pashtoon life</p>
+  </div>
+  <div class="pw-grid" id="pwGrid"></div>
+  <div class="pw-panel" id="pwPanel"></div>
+</section>
+
+<!-- TRIBES -->
+<section class="sec" id="sec-tribes">
+  <div class="sec-head">
+    <span class="sec-eye">Sons & Daughters of the Khyber</span>
+    <h2 class="sec-title">The Great Tribes</h2>
+    <p class="sec-desc">Click any tribe to read their full history, warriors, and legacy</p>
+  </div>
+  <div class="tribes-grid" id="tribesGrid"></div>
+</section>
+
+<!-- ORG CHART -->
+<section class="sec" id="sec-orgchart">
+  <div class="sec-head">
+    <span class="sec-eye">The Complete Pashtoon Family Tree</span>
+    <h2 class="sec-title">Tribal Organizational Chart</h2>
+    <p class="sec-desc">From the legendary ancestor Qais Abdur Rashid — every branch of the Pashtoon nation</p>
+  </div>
+  <p class="org-intro">According to Pashtoon genealogical tradition (Shajra), all Pashtoons descend from <strong style="color:var(--gold)">Qais Abdur Rashid</strong> — who met the Prophet's companion Khalid ibn Walid around 630 CE and returned to his people to spread Islam. His three sons — Sarban, Bitan (Betan), and Ghurghusht — became the ancestors of all the major tribal confederacies. A fourth branch, Karlani, has disputed origins but is fully Pashtoon.</p>
+  <div class="org-controls">
+    <button class="org-filter-btn on" onclick="filterOrg('all', this)">All Branches</button>
+    <button class="org-filter-btn" onclick="filterOrg('sarban', this)">Sarban Branch</button>
+    <button class="org-filter-btn" onclick="filterOrg('bitan', this)">Bitan Branch</button>
+    <button class="org-filter-btn" onclick="filterOrg('ghurghusht', this)">Ghurghusht Branch</button>
+    <button class="org-filter-btn" onclick="filterOrg('karlani', this)">Karlani Branch</button>
+  </div>
+  <div class="org-chart-wrap">
+    <div class="org-root" id="orgRoot"></div>
+  </div>
+  <div class="org-detail-panel" id="orgDetail"></div>
+</section>
+
+<!-- ON THIS DAY -->
+<section class="sec" id="sec-today">
+  <div class="sec-head">
+    <span class="sec-eye">From the Encyclopedia — Daily Pashtoon History</span>
+    <h2 class="sec-title">On This Day</h2>
+    <p class="sec-desc">A significant moment from Pashtoon history for today's date</p>
+  </div>
+  <div class="today-wrap">
+    <span class="today-date-badge" id="todayDateBadge"></span>
+    <div id="todayContent"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- TRIBE MODAL -->
+<div class="t-modal" id="tribeModal">
+  <div class="t-modal-box">
+    <button class="t-modal-close" onclick="closeModal()">✕</button>
+    <div id="tribeModalBody"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">PUKHTANA</div>
+  <div>Open-source Pashtoon cultural platform · Built with pride for the community</div>
+  <div class="footer-links">
+    <a href="https://github.com" target="_blank">GitHub</a>
+    <a href="#">Contribute</a>
+    <a href="#">About</a>
+  </div>
+  <div style="margin-top:1.5rem;font-size:0.75rem;color:var(--fog)">
+    FastAPI + Python backend · Gemini 2.0 Flash · د پښتنو دپاره · All historical content hardcoded — no AI cost
+  </div>
+</footer>
+
+<script>
+const API_BASE = "http://127.0.0.1:8000";
+
+function loader() {
+  return `<div class="loading-msg"><div class="loader"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div><span style="font-style:italic;color:var(--dust);font-size:0.9rem">Consulting the archives...</span></div>`;
+}
+
+function tryJSON(txt) {
+  try { const m = txt.match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch { return null; }
+}
+
+// NAV
+function goTo(tab) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById(`sec-${tab}`).classList.add('on');
+  document.querySelector(`[data-tab="${tab}"]`)?.classList.add('on');
+  document.getElementById('mainNav').scrollIntoView({ behavior:'smooth' });
+}
+
+// ══════════════════════════════════════════════
+// TIMELINE DATA — FULLY HARDCODED WITH DETAILS
+// ══════════════════════════════════════════════
+const TL = [
+  {
+    y:"600 BCE", ev:"Ancient Pashtoon tribes settle the Gandhara region — one of humanity's oldest civilizations",
+    sig:"Pashtoon civilization predates the rise of Rome and predates Alexander by 300 years",
+    detail:`The Gandhara region, stretching across present-day northern Pakistan and eastern Afghanistan, was one of the oldest centers of settled civilization in South Asia. Long before imperial borders and modern states, this region connected mountain tribes, caravan routes, craftsmen, monks, and warriors along the ancient Silk Road.
+
+In Pashtoon historical memory, Gandhara represents deep antiquity — proof that the lands of Peshawar, Swat, and the frontier were never empty margins of history, but part of an ancient civilizational core. The Peshawar Valley was a crossroads of trade, religion, and power for centuries before Alexander arrived.
+
+Archaeological discoveries at Taxila, Pushkalavati (Charsadda), and throughout the Swat Valley confirm continuous human habitation across millennia. The Achaemenid Persian Empire under Darius I included this region as the satrapy of Gandhara around 518 BCE — these were productive, wealthy lands that empires fought to control.`
+  },
+  {
+    y:"327 BCE", ev:"Alexander the Great besieges Massaga — Pashtoon warriors under Queen Cleophis fight to the last",
+    sig:"First recorded Pashtoon military resistance written into world history",
+    detail:`When Alexander of Macedon turned his ambitions eastward through the Hindu Kush in 327 BCE, he found the Assaceni — ancestors of the Pashtoons — waiting for him at their fortress city of Massaga. The Greek sources record with grudging admiration the ferocity of resistance they encountered.
+
+Queen Cleophis, regent of Massaga, led the defense with seven thousand Indian mercenaries and her own tribespeople. The battle lasted for days. Alexander himself was wounded by an arrow in the ankle during the siege — one of the few times in his campaign that the Macedonian conqueror bled. He described the defenders as the most warlike people he had encountered.
+
+When Massaga finally fell, Alexander negotiated a treaty rather than destroying the city — an extraordinary concession for a man who had razed Persepolis. The Greek sources note that the Assaceni warriors extracted remarkable terms even in defeat. This is the first moment in recorded history when the world's greatest army encountered the Pashtoon spirit — and found it impossible to simply crush.`
+  },
+  {
+    y:"~300 CE", ev:"The legendary Qais Abdur Rashid — ancestor of all Pashtoons — meets the Prophet's companion Khalid ibn Walid",
+    sig:"The mythological founding moment of Pashtoon identity and Islamic faith",
+    detail:`In the Pashtoon genealogical tradition, all Pashtoons trace their lineage to a single ancestor — Qais Abdur Rashid — who lived in the mountains of Sulaiman (Takht-i-Sulaiman) with his people during the early Islamic period. When news of the Prophet Muhammad reached the highlands, Qais made the long journey to Medina.
+
+There, according to tradition, he met Khalid ibn al-Walid — the "Sword of Allah" — and through him embraced Islam with his entire heart. The Prophet himself gave Qais the Islamic name "Abdur Rashid." When Qais returned to his mountains, he brought with him not only the new faith but a transformed identity. From that day, the people of the Sulaiman Mountains were Muslim — and in Pashtoon imagination, forever bonded to the earliest community of Islam.
+
+Qais had three sons — Sarban, Bitan (or Betan), and Ghurghusht — from whom all the major Pashtoon tribal confederacies descend. A fourth branch, Karlani, is also counted among Pashtoon lineages. This genealogy is the sacred charter of Pashtoon identity — recited at weddings, jirgas, and deathbeds for over a thousand years.`
+  },
+  {
+    y:"664 CE", ev:"Arab Muslim armies reach Pashtoon lands — Pashtoons embrace Islam fervently, becoming its fiercest defenders",
+    sig:"Islam becomes inseparable from Pashtoon identity and Pashtunwali",
+    detail:`The Umayyad expansion into the Afghan highlands brought Arab armies into sustained contact with the mountain peoples of the Hindu Kush and Sulaiman ranges. Unlike many conquered peoples, the Pashtoons did not merely accept Islam as a political reality — they absorbed it into their very identity with extraordinary depth and speed.
+
+Pashtunwali, the ancient tribal code, fused with Islamic values in ways that seemed almost predestined. The Pashtoon concept of Isteqamat (righteousness) aligned naturally with Islamic taqwa. Melmastia (hospitality) resonated with hadith on generosity. The tribal Jirga system had natural parallels with shura (consultation). By the 9th century, Pashtoon scholars and warriors were among the most committed Muslims in the Islamic world.
+
+This synthesis — Pashtunwali + Islam — would produce both Ahmad Shah Durrani's Islamic empire and Khan Abdul Ghaffar Khan's Sufi-inspired nonviolent movement twelve centuries later. It is the deepest root of Pashtoon civilization: not a choice between tribe and faith, but a fusion so complete that separating them is impossible.`
+  },
+  {
+    y:"870 CE", ev:"The Saffarid dynasty rises from Pashtoon blacksmith origins to rule a vast Islamic empire",
+    sig:"First Pashtoon dynasty — proof that the mountains breed rulers, not just warriors",
+    detail:`Ya'qub ibn al-Layth al-Saffar — "the Coppersmith" — was born into humble Pashtoon origins in the Seistan region. A blacksmith and brigand who became a military genius, he founded the Saffarid dynasty and rose to challenge the Abbasid Caliphate itself. His dynasty ruled from Khorasan to Sindh at its peak.
+
+The Saffarids were the first Pashtoon ruling dynasty of the post-Islamic era — they proved that the mountain tribes of the Afghan highlands were not merely fierce warriors to be used or suppressed by Persian and Arab overlords, but capable of building empires of their own. Ya'qub defeated the Arab governors of Khorasan who had treated his people as peripheral.
+
+The dynasty also contributed significantly to the revival of Persian (Dari) literature and promoted Pashto identity at a time when Arab cultural dominance was at its height. This precedent — the Pashtoon transformation from warrior tribe to imperial builder — would repeat itself with the Ghurids, the Hotakis, and ultimately the Durranis.`
+  },
+  {
+    y:"1526", ev:"Sher Shah Suri, of Pashtoon Afghan descent, defeats Humayun at Chausa and rules all of India from Delhi",
+    sig:"A Pashtoon sits on the mightiest throne in the world — Delhi — and builds the Grand Trunk Road",
+    detail:`Born Farid Khan in the Sur tribe of Pashtoon Afghans, Sher Shah Suri was perhaps the most administratively gifted ruler ever to sit on the throne of Delhi — and he was a Pashtoon. He defeated the Mughal Emperor Humayun twice (1539 at Chausa, 1540 at Kanauj) and ruled India from the Khyber to Bengal.
+
+Sher Shah's administrative genius transformed the subcontinent. He built the Grand Trunk Road — still one of Asia's great highways — stretching 2,500 kilometers from Kabul to Chittagong. He reformed the currency system, creating the Rupaya (the modern rupee traces directly to him). He established a postal system, caravanserais at regular intervals, and a census system for tax fairness that the Mughals later copied and called their own.
+
+He ruled only five years (1540–1545) before dying in a gunpowder accident. In that time, he transformed India more completely than most rulers manage in decades. When Humayun reclaimed Delhi after Sher Shah's death, he built on Sur foundations. The great Mughal administrative system was largely inherited from a Pashtoon king.`
+  },
+  {
+    y:"1625", ev:"Khushal Khan Khattak's family controls the Peshawar Valley — peak of Khattak power",
+    sig:"Pashtoon tribal power reaches its height in KPK under the great Khattak confederation",
+    detail:`The Khattak tribe, under Shahbaz Khan and then his son Akoray Khan (grandfather of Khushal), had positioned themselves as the dominant Pashtoon power in the Peshawar and Nowshera valleys by the early 17th century. They held a complex relationship with the Mughal Empire — warrior allies when useful, fierce resisters when pressed.
+
+The Khattak lands straddled the crucial trade and military route between Kabul and Delhi — the Khyber corridor. This gave them enormous strategic leverage. The Mughal emperors needed Khattak cooperation to maintain communications with Kabul. The Khattaks used this leverage masterfully, extracting concessions, titles, and revenues from both Mughals and their neighboring tribes.
+
+This was the world into which Khushal Khan Khattak was born in 1613 — a world of warrior politics, tribal honor, and immense possibility for a man of genius. His father Shahbaz Khan would raise a son who proved equally formidable with sword and pen — and who would eventually turn that genius against the Mughals themselves.`
+  },
+  {
+    y:"1672", ev:"Khushal Khan Khattak forges the Grand Pashtoon Alliance against Mughal Emperor Aurangzeb",
+    sig:"The greatest Pashtoon poet was also their greatest military unifier",
+    detail:`After being imprisoned by the Mughal Emperor Aurangzeb for years — held in Gwalior Fort despite never having been convicted of any crime — Khushal Khan Khattak emerged with a burning fury that he channeled into both poetry and politics. His release came through political maneuvering, but it only deepened his hatred for Mughal domination.
+
+In 1672, he assembled something unprecedented: a grand alliance of Pashtoon tribes that had historically competed and feuded. Afridi, Orakzai, Shinwari, Mohmand, Yusufzai — tribes separated by generations of blood feuds — sat together in Jirga and agreed to unite under Khushal's leadership against the common Mughal enemy. His poetry was the instrument of this unity.
+
+He wrote verses in battle camps, calling on every Pashtoon by name, shaming the cowardly and praising the brave, invoking the Pashtunwali code that demanded response to oppression. His poems circulated faster than letters — memorized and recited by fighters across the frontier. This was the first great Pashtoon nationalist moment: tribe subordinated (temporarily) to nation.`
+  },
+  {
+    y:"1675", ev:"Battle of Ali Masjid — Pashtoon tribal forces destroy a Mughal column in the Khyber Pass",
+    sig:"The Khyber becomes the graveyard of empires for the first time in recorded history",
+    detail:`In the narrow gorges of the Khyber Pass near Ali Masjid — where the mountains squeeze the road to barely the width of a cart — the allied Pashtoon tribes under Khushal Khan Khattak's coordination ambushed a Mughal column. The numbers in Mughal sources are contested, but the defeat was catastrophic and humiliating for Aurangzeb's armies.
+
+The Pass itself was the weapon. Pashtoon warriors who had grown up climbing these rock faces in bare feet needed no military training to understand the terrain. They rained arrows and boulders from positions the Mughal cavalry could not reach. The flat-land cavalry tactics that had conquered much of the subcontinent were useless in a gorge barely wide enough for two horses abreast.
+
+Aurangzeb sent multiple punitive expeditions. None fully succeeded. The frontier tribes extracted a lesson they would not forget: foreign armies could not conquer what they could not navigate. The Khyber Pass — the same route that had brought Alexander, the Kushans, the Ghaznavids, the Mughals — became, in Pashtoon imagination, their forever inheritance. Two centuries later, the British would learn the same lesson.`
+  },
+  {
+    y:"1709", ev:"Mirwais Hotak kills the Persian governor and declares the Hotaki dynasty — first modern Pashtoon empire",
+    sig:"A Pashtoon empire is born in Kandahar — changing the entire regional order",
+    detail:`Mirwais Khan Hotak was a Ghilzai Pashtoon chieftain of Kandahar who had been taken to Isfahan by the Safavid Persian governor Gurgin Khan as a political prisoner. There, in the court of the Safavid Shah, he learned the weaknesses of the Persian imperial system intimately. He was later permitted to return to Kandahar — a fatal mistake.
+
+In April 1709, Mirwais organized a conspiracy with his tribal elders. During a feast, Gurgin Khan was assassinated. The Persian garrison was overwhelmed. In the morning, Mirwais stood before his people as the free lord of Kandahar — and the Hotaki dynasty was born. He defeated two subsequent Persian reconquest attempts and maintained Kandahar's independence until his death in 1715.
+
+His mother was Nazo Tokhi — the founding poetess of Pashto literature — who had prepared him spiritually and psychologically for this moment. When he hesitated before the revolt, her poetry shamed him into action. Mirwais died peacefully in his bed, having established the first Pashtoon empire of the modern era — proof that the mountain people of Kandahar could not only resist empires but overthrow them.`
+  },
+  {
+    y:"1722", ev:"Mahmud Hotak marches to Persia with 25,000 men — defeats the Safavid Shah and occupies Isfahan",
+    sig:"Pashtoon warriors conquer the capital of the Persian Empire — the world trembles",
+    detail:`Mahmud Hotak, son of Mirwais, took his father's achievement to its extraordinary conclusion. In 1722, he led an army of 25,000 Pashtoon warriors from Kandahar across the vast Iranian plateau — past Herat, through Khorasan — and besieged Isfahan, the magnificent Safavid capital, one of the most beautiful cities in the world.
+
+The Persian court, weakened by decades of factional conflict and the shock of Pashtoon military prowess, crumbled. Shah Husayn surrendered his crown to Mahmud personally, removing the royal diadem and placing it on the Pashtoon conqueror's head. For seven years, the Hotaki Afghans ruled Persia from its ancient capital — a feat that still astonishes historians.
+
+The occupation was ultimately unsuccessful — Mahmud's mental health deteriorated and his cousin Ashraf failed to hold the territory against the Persian military revival under Nader Afshar. But the strategic meaning was permanent: the Pashtoon people had demonstrated to the Islamic world that they were not barbarian tribesmen from the margins but a civilizational force capable of reshaping empires. The year 1722 stands as the apex of Pashtoon military achievement.`
+  },
+  {
+    y:"1747", ev:"Ahmad Shah Abdali chosen by Loya Jirga in Kandahar — founds the Durrani Empire. Afghanistan is born.",
+    sig:"AFGHANISTAN IS BORN. Ahmad Shah Baba unites all Pashtoon tribes — the nation's greatest moment",
+    detail:`After the assassination of Nader Shah Afshar in 1747, his empire fragmented overnight. His generals scrambled for power across Khorasan, Persia, and Central Asia. In Kandahar, the Pashtoon chiefs assembled in the great Loya Jirga — the grand tribal council — to determine their own future. They were free for the first time in a generation.
+
+After nine days of deliberation, a remarkable thing happened: rather than choosing one of the powerful tribal elders who expected the honor, the Jirga selected Ahmad Shah Abdali — a 25-year-old commander who had served brilliantly under Nader Shah. He had no great tribal faction of his own. But he had something rarer: the universal respect of men who disagreed on everything else. A Sufi elder named Sabir Shah placed a handful of wheat stalks on Ahmad Shah's head — a crown made of the earth — and the greatest Pashtoon in history accepted.
+
+He gave his tribal confederation a new name: Durrani, from "Durr-i-Durran" — Pearl of Pearls. Within months he had united all Pashtoon tribes, taken Ghazni, Kabul, and Peshawar. Within two years, his empire stretched from Khorasan to Kashmir. He is called "Baba" — Father — to this day, the only ruler in Afghan history to hold that title.`
+  },
+  {
+    y:"1761", ev:"Battle of Panipat — Ahmad Shah with 60,000 Pashtoon cavalry crushes the Maratha Confederacy",
+    sig:"The most decisive battle in South Asian history — 28,000 Maratha dead in a single day",
+    detail:`The Third Battle of Panipat on January 14, 1761 was arguably the most consequential battle in South Asian history after Plassey. The Maratha Confederacy — then the dominant power in India with ambitions to rule from Delhi — brought an army of 300,000 (including non-combatants) to face Ahmad Shah Durrani's forces.
+
+Ahmad Shah's genius was preparation. He had spent months coordinating with Rohilla Afghans and the Nawab of Awadh, building a coalition that combined Pashtoon cavalry ferocity with strategic patience. The Marathas, despite their numbers, were deep in enemy territory, their supply lines cut, their horses starving. Ahmad Shah waited.
+
+When battle came, the Pashtoon cavalry — particularly the qizilbash and Durrani horsemen — executed a coordinated pincer attack that turned the Maratha flanks. The Maratha Peshwa Vishwasrao was killed early. Viswasrao's death caused panic. By afternoon, 28,000 Maratha warriors lay dead on the plains of Panipat. It was the largest single-day military defeat in South Asian recorded history. Ahmad Shah had secured Muslim political dominance of North India for another generation.`
+  },
+  {
+    y:"1775", ev:"Ahmad Shah Durrani dies in Kandahar. His last words: 'Do not fight among yourselves.'",
+    sig:"The death of Afghanistan's greatest ruler — his warning went unheeded for 200 years",
+    detail:`Ahmad Shah Durrani died in Maruf, near Kandahar, in October 1775, of a disease of the face (possibly cancer) that had tormented him for years. He was perhaps 50 years old. For 26 years he had held together by sheer force of personality the most fractious political entity imaginable — an empire built on tribal confederacy, where every chief was a king in his own mountain.
+
+He was buried in Kandahar beneath a pomegranate tree, near the shrine of the Cloak of the Prophet — which he had brought to Kandahar as the most sacred Islamic relic in his keeping. The shrine became his eternal companion. His tomb remains in Kandahar today, a place of pilgrimage.
+
+His final words — a warning against internal fighting — were prophetic. Within a generation, his empire had fragmented into brutal civil war between his sons. The British would exploit this fragmentation for a century. The lesson of Ahmad Shah Baba is both a monument and a wound: the Pashtoon people once built the largest empire in Asia, and lost it to themselves.`
+  },
+  {
+    y:"1809", ev:"Ranjit Singh's Sikh Empire annexes Peshawar — Pashtoon tribes launch decades of resistance",
+    sig:"Peshawar — the City of Flowers — falls to a non-Pashtoon ruler for the first time in 62 years",
+    detail:`Maharaja Ranjit Singh — "The Lion of Punjab" — was the most capable ruler of his era on the subcontinent. The Sikh Empire he built from Lahore was militarily formidable, with French-trained artillery and infantry that could match any European force. When he turned his ambitions to Peshawar in the 1820s, he faced the always-rebellious Pashtoon tribes.
+
+Peshawar fell to Sikh control after the Battle of Nowshera in 1823. The Pashtoon response was ferocious and unceasing. Sayyid Ahmad Barelvi launched a full Islamic jihad movement from the tribal belt, gathering Pashtoon fighters under religious and nationalist banners. The Afridis, Yusufzai, and other tribes harassed Sikh garrisons constantly.
+
+The Sikh empire was the first non-Pashtoon, non-Muslim power to control Peshawar since pre-Islamic times. Its rule lasted from 1823 to 1849 — and was never peaceful for a single year. The British, when they defeated the Sikhs, inherited this situation: a frontier they could occupy but never truly pacify.`
+  },
+  {
+    y:"1839", ev:"Britain launches the First Anglo-Afghan War — 20,000 soldiers march toward Kabul",
+    sig:"The Great Game begins. Britain wants Afghanistan as a buffer against Russian expansion",
+    detail:`The First Anglo-Afghan War (1839–1842) began as a textbook example of imperial overreach. The British East India Company, alarmed by Russian influence at the court of Kabul's Amir Dost Mohammad Khan, decided to replace him with their preferred candidate — Shah Shuja Durrani, a pliable exile.
+
+An "Army of the Indus" of 21,000 British and Indian soldiers (with 38,000 camp followers) crossed the Bolan Pass and occupied Kandahar, then Kabul, with surprising ease in 1839. Shah Shuja was installed. The British concluded that Afghanistan was conquered. Their officers hunted, socialised, and played cricket on the Kabul plain. The wives of officers arrived.
+
+They had mistaken the silence of a people calculating for submission. The Pashtoon tribes watched, waited, and prepared. In November 1841, an uprising in Kabul killed the British political agent Sir Alexander Burnes. General Elphinstone — described even by his own officers as paralyzed and incompetent — negotiated a humiliating retreat. The massacre in the Khyber that followed would become the most famous military disaster in British imperial history.`
+  },
+  {
+    y:"1842", ev:"The Great Disaster — British army of 16,500 annihilated in the Khyber. One man reaches safety.",
+    sig:"The greatest defeat in British Imperial history — the Pashtoon proved they cannot be conquered",
+    detail:`January 6, 1842. The British garrison of Kabul — 4,500 soldiers and nearly 12,000 camp followers — began their retreat through winter snow toward Jalalabad, 145 kilometers away. They had been promised safe passage by Wazir Akbar Khan, son of the exiled Amir. The promise was not kept.
+
+For seven days, Ghilzai Pashtoon warriors attacked the column in the mountain passes. The snow turned red. The freezing temperatures killed as many as the bullets. Officers tried to negotiate. Nothing helped. The column disintegrated into fragments, then individuals, then corpses.
+
+On January 13, 1842, a wounded British army surgeon named Dr. William Brydon rode into the fort at Jalalabad on a dying horse. He was the only European to complete the march alive. When the garrison's sentry asked where the army was, Brydon reportedly replied: "I am the army." Lady Elizabeth Butler's famous painting — "Remnants of an Army" — depicting the gaunt Brydon on his horse became one of Victorian Britain's most iconic images. It did not make the British stop trying to conquer Afghanistan. But it made them afraid.`
+  },
+  {
+    y:"1878", ev:"Second Anglo-Afghan War — Britain invades again. The Treaty of Gandamak follows.",
+    sig:"Pashtoon resistance forces Britain to negotiate — Afghanistan retains internal independence",
+    detail:`Britain invaded Afghanistan a second time in November 1878, ostensibly because the Amir Sher Ali Khan had received a Russian diplomatic mission while refusing a British one. Three British columns crossed the border simultaneously from different directions. This time they were better organized, better armed, and had learned from 1842.
+
+The war went initially well for Britain. A treaty was negotiated — the Treaty of Gandamak of 1879 — which gave Britain control of Afghanistan's foreign policy while leaving internal governance to the Amir. It seemed like a British victory. Then the British resident Major Louis Cavagnari and his entire staff were massacred in Kabul in September 1879 by Afghan soldiers and a mob.
+
+The war resumed. General Frederick Roberts led the famous march from Kabul to Kandahar — 330 miles in 22 days — to relieve a besieged garrison. The British won every pitched battle. But the countryside was never pacified. The final outcome — a semi-independent Afghanistan under British "guidance" — was essentially what Dost Mohammad had offered before the first war. Three decades, two wars, and thousands of dead on both sides to achieve what diplomacy could have given.`
+  },
+  {
+    y:"1880", ev:"Battle of Maiwand — Malalai of Maiwand lifts the Afghan banner and leads the charge against Britain",
+    sig:"Malalai becomes the Pashtoon Joan of Arc — her sacrifice inspires resistance across Afghanistan",
+    detail:`July 27, 1880. At the village of Maiwand near Kandahar, Ayub Khan's Afghan forces — including a large contingent of Pashtoon tribal fighters — faced a British brigade under Brigadier Burrows. Despite being outnumbered in artillery, the Afghans pressed the attack with ferocity.
+
+At a critical moment, when the Afghan center began to waver, a young Pashtoon woman named Malalai — daughter of a shepherd, engaged to be married — picked up the Afghan banner from a fallen standard-bearer. She improvised a verse of Pashto poetry on the spot, calling to the fighters:
+
+"Young love, if you do not fall in the battle of Maiwand / By God, someone is saving you as a symbol of shame!"
+
+The men rallied. The British brigade was overwhelmed — 969 British and Indian soldiers killed or wounded in one of the British Army's worst defeats of the era. Malalai herself was killed in the fighting, becoming immortal in death. The British were forced to abandon Kandahar temporarily. Malalai is Afghanistan's greatest female national hero — her name given to schools, hospitals, and daughters across the Pashtoon world.`
+  },
+  {
+    y:"1893", ev:"The Durand Line drawn — cutting the Pashtoon homeland in half between British India and Afghanistan",
+    sig:"A wound drawn in ink that separates families, tribes, and a nation to this day",
+    detail:`Sir Henry Mortimer Durand met Amir Abdur Rahman Khan of Kabul in October 1893. What emerged from that meeting — under considerable British pressure on the Amir — was a 2,640-kilometer line drawn through the Pashtoon homeland, dividing it between British India and Afghanistan.
+
+The line was drawn for British strategic purposes. It gave Britain control of the tribal belt while acknowledging Afghan sovereignty over Kabul and its immediate surroundings. It bore no relationship to tribal territories, family boundaries, or the natural geography of Pashtoon life. The Afridi tribe was split. The Wazir tribe was split. The Mohmand tribe was split. The Shinwari tribe was split. Families found themselves in two countries overnight.
+
+The Durand Line expired legally under British agreements — set for revision after 100 years — but Pakistan inherited it from Britain in 1947 and insists on its permanence. Afghanistan has never officially recognized it. Every Pakistani Pashtoon who crosses to Kandahar, every Afghan Pashtoon who visits Peshawar, crosses a line drawn by a British civil servant who had never lived among the people he was dividing. It remains the deepest political wound in the Pashtoon world.`
+  },
+  {
+    y:"1919", ev:"Third Anglo-Afghan War — Amanullah declares full independence. Britain is defeated for the third time.",
+    sig:"Afghanistan becomes the FIRST country to defeat Britain in the 20th century",
+    detail:`On May 3, 1919, the new Afghan Amir Amanullah Khan declared jihad against Britain and launched attacks across the Durand Line. He timed it perfectly: Britain was exhausted from the First World War, Indian troops were restless, and the Khilafat Movement was building pan-Islamic sentiment across South Asia.
+
+The Third Anglo-Afghan War lasted only one month but its results were decisive. Britain used airplanes to bomb Jalalabad and Kabul — the first time air power was used against the Afghans. Despite this technological advantage, the British were unable to subdue the frontier tribes and faced political pressure at home to end an unpopular war.
+
+The Treaty of Rawalpindi of August 1919 granted Afghanistan full control of its own foreign policy — independence in every meaningful sense. Amanullah immediately began diplomatic relations with the new Soviet Union, the Ottoman Empire, and other nations. He styled himself not just King but "Padshah of Afghanistan." Britain, which had started three wars to control Afghanistan, ended having achieved none of its strategic objectives. The Pashtoon fighters of 1842 and 1880 and their sons in 1919 had collectively defeated the British Empire.`
+  },
+  {
+    y:"1929", ev:"Khan Abdul Ghaffar Khan founds Khudai Khidmatgar — 100,000-strong nonviolent Pashtoon army",
+    sig:"Pashtoons build the world's largest nonviolent resistance movement",
+    detail:`Khan Abdul Ghaffar Khan — born 1890 in Charsadda, Yusufzai Pashtoon — is the most radical figure in Pashtoon history precisely because he took the most unlikely path: nonviolence. Among a people defined by warrior culture, he built an army of 100,000 Pashtoon men and women who swore to resist British rule without weapons.
+
+The Khudai Khidmatgar — "Servants of God" — wore red uniforms and practiced strict discipline inspired by both Pashtunwali and Quranic values. They ran schools, cleaned villages, settled disputes. When British soldiers fired on them, they did not run or fight back. They stood and absorbed the beatings. This so unnerved British officials that they banned the organization and imprisoned Ghaffar Khan repeatedly.
+
+He was imprisoned for more total years than any other leader of the independence movement — over 30 years in Pakistani and Afghan jails across his long life. He outlived Gandhi, Jinnah, and Nehru. He died in 1988 in Jalalabad, aged 98, having never compromised his commitment to Pashtoon rights. He is the greatest Pashtoon of the 20th century — the man who proved that the ancient code of Nang could find expression not only in the sword but in the silent, immovable dignity of unarmed resistance.`
+  },
+  {
+    y:"1947", ev:"Pakistan created. Pashtoon leader Ghaffar Khan says: 'You have thrown us to the wolves.'",
+    sig:"The modern political reality of Pashtoons is set — split between Pakistan and Afghanistan",
+    detail:`The partition of British India in August 1947 was catastrophic for the Pashtoon people. Khan Abdul Ghaffar Khan and his Congress-aligned Pashtoon leadership had campaigned for a third option — a united Pashtoonistan state or independent Pashtoon voice — and were given none.
+
+The NWFP referendum presented voters with only two choices: join Pakistan or join India. There was no option for independence or a unified Pashtoon homeland across the Durand Line. Ghaffar Khan called for a boycott. The referendum went ahead. NWFP voted to join Pakistan — a vote Ghaffar Khan's supporters contested as manipulated. He was arrested within months of Pakistan's creation.
+
+His words — "You have thrown us to the wolves" — addressed to Gandhi and the Congress leadership who had supported partition without adequate protections for Pashtoon political rights, became a defining statement of Pashtoon alienation. The political dynamics established in 1947 — Pashtoons split between Pakistan and Afghanistan, politically marginalized, their ancient homeland bisected — set the framework for every subsequent conflict in the region, including the Soviet War, the Taliban period, and the war on terror.`
+  },
+  {
+    y:"2018", ev:"Pashtoon Tahafuz Movement (PTM) emerges — young Pashtoons demand rights, dignity, and justice",
+    sig:"A new generation of Pashtoons speaks — in the language of rights, not rifles",
+    detail:`The Pashtoon Tahafuz Movement began after the killing of Naqeebullah Mehsud — a young Pashtoon man shot extrajudicially by police in Karachi in January 2018. What started as protest over one death became the largest civil rights movement in Pakistani Pashtoon history.
+
+Manzoor Pashteen — a young Mehsud Pashtoon from South Waziristan — emerged as the movement's voice. His speeches, delivered in simple Pashto and Urdu, went viral. He spoke of landmines in tribal lands, enforced disappearances, checkpoints where young Pashtoon men were humiliated daily, the decades of military operations that had displaced millions.
+
+The movement was extraordinary in its deliberate nonviolence — echoing, consciously or not, the legacy of Khan Abdul Ghaffar Khan. Hundreds of thousands attended PTM rallies in Peshawar, Lahore, and Karachi. The state response was arrests, bans on rallies, and restrictions on media coverage. The PTM continues — proof that the Pashtoon political conscience, suppressed for decades, is alive in the generation born after 9/11.`
+  }
+];
+
+function buildTimeline() {
+  const w = document.getElementById('tlWrap');
+  w.innerHTML = TL.map((e, i) => `
+    <div class="tl-item" id="tl${i}" onclick="toggleTL(${i})">
+      <div class="tl-year">${e.y}</div>
+      <div class="tl-event">${e.ev}</div>
+      <div class="tl-sig">${e.sig}</div>
+      <div class="tl-expand" id="tlx${i}"></div>
+    </div>
+  `).join('');
+}
+
+function toggleTL(i) {
+  const item = document.getElementById(`tl${i}`);
+  const exp = document.getElementById(`tlx${i}`);
+  const isOpen = item.classList.contains('expanded');
+  document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('expanded'));
+  if (!isOpen) {
+    item.classList.add('expanded');
+    const e = TL[i];
+    const paras = (e.detail || 'No detail available.').trim().split('\n\n');
+    exp.innerHTML = `<div>${paras.map(p => `<p style="margin-top:1rem;color:var(--dust);line-height:1.9">${p.trim()}</p>`).join('')}</div>`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// POETRY DATA — FULLY HARDCODED
+// ══════════════════════════════════════════════
+const POETS = {
+  "Rahman Baba": {
+    icon:"📜", years:"1634 – 1715",
+    bio:"Abd al-Rahman, known as Rahman Baba, is the greatest Pashto poet — the Shakespeare of the mountains. Born in Bahadur Kelai near Peshawar, he was a Sufi mystic whose poetry transcends religion and tribe, speaking of love, unity, nature, and the divine. He was an Momand Pashtoon. Pashtoons have memorized his verses for over 350 years. His shrine in Hazarkhwani, Peshawar remains a place of pilgrimage — destroyed by Taliban in 2009, rebuilt by the people.",
+    poems:[
+      {
+        nm:"On Unity of the Pashtoons",
+        pashto:"که يو بل سره جوړ شو\nد دښمن ژوند تنګ شو\nکه يو بل سره جنګ شو\nد دښمن سر سنګ شو",
+        eng:"If we unite with one another\nThe enemy's life becomes constrained\nIf we fight each other\nThe enemy's head becomes a stone (of triumph)",
+        ctx:"Written during a period of Mughal pressure on Pashtoon tribes — Rahman Baba pleaded for unity. This poem was quoted by Khan Abdul Ghaffar Khan 250 years later in his nonviolent resistance movement. Its simplicity and truth have made it the most quoted political poem in Pashto."
+      },
+      {
+        nm:"On the Gardener and the Rose",
+        pashto:"د ګل باغوان يو دی\nخو ګل جدا جدا دی\nد يار ميني باغ کې\nزه او ستا خبره ده",
+        eng:"The gardener of the flower is one\nBut each flower is separate\nIn the garden of the beloved's love\nThis conversation is between you and me",
+        ctx:"Rahman Baba's mystical poetry uses the metaphor of the garden — beloved in Sufi tradition as representing divine love — to speak of unity in diversity. All Pashtoons are flowers of one garden, one gardener. This poem has been set to music and sung at Pashtoon gatherings for centuries."
+      }
+    ]
+  },
+  "Khushal Khan Khattak": {
+    icon:"⚔️", years:"1613 – 1689",
+    bio:"Khushal Khan Khattak — warrior, chieftain, statesman, and the mightiest voice in Pashto literature. He led the Grand Pashtoon Alliance against Mughal Emperor Aurangzeb after being imprisoned without conviction. When his sword was taken, he used his pen as a weapon. He wrote over 45,000 verses — poems of war, love, nature, and Pashtoon pride. He is called 'the king of Pashto poetry' and the first great Pashtoon nationalist.",
+    poems:[
+      {
+        nm:"What It Means to Be Pashtoon",
+        pashto:"پښتون هغه دی چه د پښتونولي\nد لار پر سر ولاړ وي\nد ننګ او نامو سره\nد مرګ سره چار نه کاږي",
+        eng:"A Pashtoon is one who stands\nFirm on the path of Pashtunwali\nWith honor and his good name\nWho never bargains with death",
+        ctx:"The defining poem of Pashtoon identity. Written while Khushal was imprisoned by Aurangzeb — a declaration that Pashtoonness is not in blood but in how you live. Memorized by millions across generations, it remains the most famous definition of Pashtoon character in literature."
+      },
+      {
+        nm:"Message to Aurangzeb",
+        pashto:"زما د توري سره خبر\nد خوساله ستا سر نه شي\nخو که ستا سر ته رسيدم\nبيا به ستا ناکار نه شي",
+        eng:"My sword carries a message for you\nYour neck will not escape its edge\nBut if I reach your throat\nThen your evil will end forever",
+        ctx:"Written directly against Emperor Aurangzeb — one of the most powerful acts of literary defiance in Asian history. Poetry as psychological warfare. Khushal distributed these verses among the tribes to sustain morale during the long guerrilla campaign. The Mughal Empire never fully subdued the Pashtoon Khyber Belt."
+      }
+    ]
+  },
+  "Nazo Tokhi": {
+    icon:"👑", years:"1651 – 1717",
+    bio:"Nazo Tokhi is the founding mother of Pashtoon literature — called 'Madar-e-Afghan' (Mother of Afghanistan). A Ghilzai Pashtoon woman of extraordinary courage and intellect, she was the mother of Mirwais Hotak, founder of the Hotaki Empire. When her son hesitated before the revolution, her poetry shamed him into greatness. She is the first and greatest woman poet in the Pashto language — and a political force who shaped empires.",
+    poems:[
+      {
+        nm:"To Her Son Before the Revolution",
+        pashto:"زوي مي که مرد وي\nد مرګ نه نه وراڅي\nکه سر ورکوي\nنه دي ژوند بيا مرګ دی",
+        eng:"If my son is a true man\nLet him not flee from death\nIf he gives his life for honor\nLife without it was already death",
+        ctx:"Nazo Tokhi sent her son Mirwais these words when he wavered before launching his revolt against the Persian governor Gurgin Khan. He obeyed — and founded the first Pashtoon empire of the modern era. This poem is the most consequential in Pashto literature: four lines that changed history."
+      },
+      {
+        nm:"The Pashtoon Woman's Oath",
+        pashto:"د پښتنې ژوند\nد ننګ سره تړلی دی\nکه مړه وم\nد کور ننګ ژوندی دی",
+        eng:"A Pashtoon woman's life\nIs forever bound with honor\nEven when I am gone\nThe honor of the home lives on",
+        ctx:"Nazo Tokhi's declaration that Pashtoon women are not passive keepers of the hearth — they are the guardians of family honor and the inspiration behind every warrior. She proved it with her own life, raising a son who overthrew empires and a legacy that endures 300 years later."
+      }
+    ]
+  }
+};
+
+const poetKeys = Object.keys(POETS);
+let curPoet = poetKeys[0];
+
+function buildPoets() {
+  document.getElementById('poetTabs').innerHTML = poetKeys.map(k => `
+    <div class="poet-tab ${k===curPoet?'on':''}" onclick="selectPoet('${k}')">
+      <span class="poet-icon">${POETS[k].icon}</span>
+      <div class="poet-nm">${k}</div>
+      <div class="poet-yr">${POETS[k].years}</div>
+    </div>
+  `).join('');
+  renderPoet(curPoet);
+}
+
+function selectPoet(k) {
+  curPoet = k;
+  document.querySelectorAll('.poet-tab').forEach((t,i) => t.classList.toggle('on', poetKeys[i]===k));
+  renderPoet(k);
+}
+
+function renderPoet(k) {
+  const p = POETS[k];
+  document.getElementById('poetContent').innerHTML = `
+    <div class="poet-bio-box">
+      <div class="poet-big-icon">${p.icon}</div>
+      <div>
+        <div class="poet-bio-name">${k}</div>
+        <div class="poet-bio-dates">${p.years}</div>
+        <div class="poet-bio-text">${p.bio}</div>
+      </div>
+    </div>
+    <div class="poems-grid">
+      ${p.poems.map(pm => `
+        <div class="poem-card">
+          <div class="poem-nm">${pm.nm}</div>
+          <div class="poem-pashto">${pm.pashto.replace(/\n/g,'<br>')}</div>
+          <div class="poem-english">${pm.eng.replace(/\n/g,'<br>')}</div>
+          <div class="poem-context">${pm.ctx}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════
+// PASHTUNWALI DATA — FULLY HARDCODED WITH STORIES
+// ══════════════════════════════════════════════
+const PW = [
+  {
+    nm:"Melmastia", mean:"Hospitality",
+    desc:"Unconditional hospitality to all guests — even enemies — regardless of personal cost. A Pashtoon will feed a stranger his last meal before sleeping hungry. This is not mere etiquette; it is a sacred obligation binding on every Pashtoon from the humblest farmer to the greatest Khan. The word 'welcome' in Pashto — 'Khush Āmadid' — is considered a holy utterance.",
+    story:`During the 1842 retreat from Kabul, British soldiers who survived the massacre were sometimes sheltered by individual Pashtoon families despite the general war — because those families had extended Melmastia the moment a stranger crossed their threshold. A guest, regardless of who he was, was sacrosanct under Melmastia. The same code that drove warriors to fight the British compelled individual Pashtoons to protect them once hospitality was offered.
+
+There is a recorded account of a British officer, Captain Charles Mackenzie, who survived the retreat because a Ghilzai chief named Mohammad Shah Khan sheltered him for weeks — at personal risk from his own tribesmen who wanted to kill every British soldier. When asked why, the chief answered simply: "He came to my door."
+
+This is Melmastia in its purest form: not a calculation, not a political decision, but an unconditional response to human need that supersedes all other considerations. It is the foundation of Pashtoon civilization — the reason their Hujra (guest house) is always open, always stocked, and never locked.`
+  },
+  {
+    nm:"Nanawatai", mean:"Asylum & Forgiveness",
+    desc:"The sacred obligation to grant asylum and forgiveness to anyone who enters your home and asks for it — even a blood enemy. If a man kneels before you with grass in his mouth (a sign of supplication), you must protect him with your own life. Nanawatai can stop a blood feud that has lasted 100 years. It is mercy as a martial virtue.",
+    story:`In 2002, the Navy SEAL Marcus Luttrell — the "Lone Survivor" — was the sole American to escape a Taliban ambush in the mountains of Kunar province. Badly wounded, he crawled for miles before being found by Mohammad Gulab, a Pashtoon farmer of the Sabray village. Gulab's tribe invoked Nanawatai.
+
+Despite Taliban demands to hand over the American, the entire Sabray village refused. Armed Pashtoon men surrounded Luttrell's refuge around the clock. The Taliban threatened to destroy the village. The village held firm — because Nanawatai had been invoked and Pashtoon honor permitted no other response. Gulab sent a message to the nearest American base on Luttrell's behalf, and he was rescued.
+
+Gulab's family later received death threats for years and eventually came to America as refugees. He gave up everything to fulfill an ancient tribal obligation that his ancestors had observed for a thousand years. The story illustrates that Nanawatai is not weakness or naivete — it requires greater courage than combat. It is the bravest thing a Pashtoon can do.`
+  },
+  {
+    nm:"Badal", mean:"Justice & Revenge",
+    desc:"The obligation to seek justice for wrongs done to yourself, your family, or your tribe. Badal is not rage — it is the restoration of cosmic balance. It may wait years, even generations. But a Pashtoon never forgets an injustice. Only Nanawatai (asylum/forgiveness) can stop Badal once it is set in motion. It is why Pashtoons say: 'Pashtoons never forgive and never forget — unless they choose to.'",
+    story:`The clearest historical expression of Badal is the Pashtoon response to every British defeat inflicted on them — and their responses to every British atrocity. After the Killing of Sarfaraz Khan at Ambela in 1863, his tribe pursued Badal for 11 years before a Jirga finally mediated a settlement.
+
+In 1879, after the massacre of the British mission in Kabul, Badal was invoked by General Roberts himself — who executed hundreds of Afghans in what he called "reprisals" but which followed the exact Pashtoon logic of Badal: a wrong had been done, cosmic balance must be restored. Even Roberts, unwittingly, was following Pashtunwali.
+
+Badal is the reason Pashtoon blood feuds can last for generations — but it is also the mechanism that gave Pashtoon society a form of justice before courts existed. A Khan who knew his wrongs would be repaid with interest behaved more carefully. Badal is not barbarism — it is accountability without judges.`
+  },
+  {
+    nm:"Nang", mean:"Honor",
+    desc:"Honor — the supreme value above all others, above wealth, above life itself. To live and die with Nang is the highest calling of every Pashtoon. Pashtoon fighters chose death over surrender in every Anglo-Afghan War because Nang demanded it. A man who loses his Nang is no longer considered a Pashtoon — he is invisible to his community.",
+    story:`When the British captured Kabul in 1879 for the second time, they held military trials and executed Afghans for the massacre of their mission. The condemned men walked to execution with composure. British officers who witnessed these executions noted, with a mixture of bewilderment and respect, that the condemned showed no fear — only the dignity of men who believed death with honor superior to life with shame.
+
+Khan Abdul Ghaffar Khan took this same concept of Nang and transformed it. His argument was that Pashtoons who submitted passively to British humiliation — checkpoints, beatings, random arrests — were losing their Nang just as surely as a man who fled from battle. True Nang, he argued, required you to stand and face violence without flinching, arms at your sides, eyes forward. 100,000 Pashtoon men agreed with him.
+
+Nang is not pride. Pride is a feeling. Nang is an ontological state — the condition of being fully Pashtoon. Its loss is not embarrassment but erasure.`
+  },
+  {
+    nm:"Tureh", mean:"Bravery",
+    desc:"Courage in battle and in the affairs of life. A Pashtoon must be brave — not recklessly, but deliberately. Ahmad Shah Durrani personally led cavalry charges into battle. Khushal Khan Khattak fought into his 70s. Cowardice is the deepest shame; a coward shames not just himself but his father, grandfather, and seven generations before him.",
+    story:`At the Battle of Maiwand in 1880, the Afghan standard-bearer was shot down. The entire Afghan line had seen it — the loss of the banner at a critical moment could break morale and the battle. Malalai — a young woman present at the battle tending to the wounded — picked up the fallen banner and walked forward into the fire, improvising a verse of Pashto poetry as she advanced.
+
+This was Tureh — bravery — in its most essential form: not the absence of fear, but action despite it. Malalai was not a warrior. She had no weapon. She walked toward bullets with a flag and a poem. She was killed. But the Afghan line held, rallied, and won the battle.
+
+Tureh is demonstrated not just by the men who fight but by the mothers who send them, the poets who shame them into courage, and the women who pick up fallen banners. The entire culture is organized around the production and celebration of bravery as the highest human quality.`
+  },
+  {
+    nm:"Sabat", mean:"Loyalty",
+    desc:"Absolute loyalty to friends, family, tribe, and word given. When British officers attempted to bribe Pashtoon tribal leaders during the Anglo-Afghan wars, most returned the gold and reported the insult to their chiefs. Betrayal of a friend or guest is considered more shameful than cowardice in battle. To break your word is to cease to be Pashtoon.",
+    story:`The story of Ahmad Khan Wazir and his British prisoner illustrates Sabat perfectly. During the Second Anglo-Afghan War, Ahmad Khan — a Waziri elder — had given his word to a British officer that the man would be safely conducted to the border. His own sons refused to escort a British enemy. Ahmad Khan escorted the officer personally, alone, for three days through hostile territory, returning home to face his own tribe's anger.
+
+When his sons demanded to know why he had risked his life for a British man they hated, Ahmad Khan replied: "I gave my word. If I break my word, what am I?" He was not protecting the British officer. He was protecting something more fundamental: his own identity as a Pashtoon. The word given under Sabat is not a contract — it is the definition of the self.
+
+This explains why Pashtoon guides and interpreters in every modern conflict — from the British era to NATO — often died rather than abandon the foreigners they had sworn to protect. Sabat made them.`
+  },
+  {
+    nm:"Isteqamat", mean:"Righteousness",
+    desc:"Living according to righteous Islamic principles combined with the tribal code. Isteqamat is spiritual integrity — the alignment of your inner self with your outer behavior. Khan Abdul Ghaffar Khan embodied this by combining Quranic values with Pashtunwali to create the world's largest nonviolent army. Righteousness and courage are inseparable in Pashtoon thinking.",
+    story:`Isteqamat is perhaps best illustrated in the life of Khan Abdul Ghaffar Khan — 'Bacha Khan' — who was imprisoned for more than 30 years across Pakistan and Afghanistan. Prison guards reported that he maintained his prayers, his dignity, and his political principles without compromise regardless of what conditions he was subjected to.
+
+During one particularly brutal imprisonment in Haripur jail in the 1950s, Bacha Khan was subjected to conditions designed to break him — solitary confinement, inadequate food, denial of visitors. He responded by teaching himself Urdu in prison and translating Pashto poetry. When finally released, he looked healthier than when he entered — because, he said, he had spent the time in the company of God.
+
+Isteqamat is what makes Pashtoon resistance long-term and consistent rather than episodic. It is the spiritual backbone beneath the warrior exterior. A man practicing Isteqamat does not fight because he is angry — he acts because righteousness demands it, and continues regardless of personal cost.`
+  },
+  {
+    nm:"Namus", mean:"Protection of Women",
+    desc:"The absolute duty to protect the dignity, safety, and honor of all women — mother, sister, wife, daughter, and the women of the entire community. Namus extends to all women who enter Pashtoon territory. The violation of a Pashtoon woman's dignity is the most serious trigger for Badal (revenge). It is also why Pashtoon men died protecting the women of other tribes.",
+    story:`The story of Nazo Tokhi herself embodies Namus in its highest form — not women as passive recipients of protection, but women as the active centers of honor who inspire and define the men around them. Mirwais Hotak's revolutionary courage was literally produced by his mother's poetry and her refusal to raise a cowardly son.
+
+In the tribal system, Namus creates an architecture of mutual protection. A Pashtoon woman who seeks the protection of a neighboring tribe's elder — invoking the code — must be sheltered even if her pursuers are the elder's own allies. This has in historical record stopped blood feuds and military operations alike.
+
+The other face of Namus — the one that generates justified criticism — is its use to restrict women's movement and choices in the name of protection. This tension between Namus as shield and Namus as constraint is the central challenge of modern Pashtoon society, and is being renegotiated in real time by Pashtoon women writers, activists, and ordinary families across the world.`
+  },
+  {
+    nm:"Ghayrat", mean:"Valor & Self-Respect",
+    desc:"Refusing to be humiliated under any circumstances — maintaining personal dignity even in defeat, even in captivity. Khushal Khan Khattak wrote his most powerful poetry while imprisoned by Aurangzeb — his pen became his weapon when his sword was taken. Ghayrat is the fire inside that cannot be extinguished. Without it, Pashtoons believe, a man is already dead.",
+    story:`When the British army finally captured the great Afridi chief, Ajab Khan, after years of frontier warfare, they brought him in chains before a British Political Agent. The British officer expected submission. Ajab Khan looked at him with calm contempt, and said (according to the political agent's own diary): "You have my body. You will never have my submission."
+
+He was imprisoned for years. He never collaborated, never provided intelligence, never gave the British a single useful word about his tribe. He was eventually released — too old to fight effectively, the British calculated, but still dangerous to keep imprisoned because his very captive presence inspired resistance. He returned to his village and died shortly after, having never broken.
+
+Ghayrat is the quality that makes Pashtoon prisoners dangerous rather than useful. It is also the quality that makes Pashtoon political movements long-lasting — movements led by people practicing Ghayrat cannot be bought, intimidated, or simply waited out. They must either be addressed or they will continue.`
+  }
+];
+
+function buildPW() {
+  document.getElementById('pwGrid').innerHTML = PW.map((p, i) => `
+    <div class="pw-card ${i===0?'on':''}" id="pw${i}" onclick="selectPW(${i})">
+      <div class="pw-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="pw-name">${p.nm}</div>
+      <div class="pw-mean">${p.mean}</div>
+    </div>
+  `).join('');
+  selectPW(0);
+}
+
+function selectPW(i) {
+  document.querySelectorAll('.pw-card').forEach((c,j) => c.classList.toggle('on', j===i));
+  const p = PW[i];
+  const panel = document.getElementById('pwPanel');
+  panel.classList.add('on');
+  const storyParas = p.story.trim().split('\n\n');
+  panel.innerHTML = `
+    <div class="pw-panel-name">${p.nm}</div>
+    <div class="pw-panel-mean">${p.mean}</div>
+    <div class="pw-panel-desc">${p.desc}</div>
+    <div class="orn"><div class="orn-l"></div><div class="orn-d"></div><div class="orn-l"></div></div>
+    <div class="pw-panel-story-label">HISTORICAL STORY</div>
+    <div class="pw-story">${storyParas.map(p=>`<p style="margin-bottom:1rem;color:var(--dust);line-height:1.9">${p.trim()}</p>`).join('')}</div>
+  `;
+}
+
+// ══════════════════════════════════════════════
+// TRIBES DATA — FULLY HARDCODED WITH FULL HISTORIES
+// ══════════════════════════════════════════════
+const TRIBES = [
+  {
+    nm:"Durrani", reg:"Kandahar, Helmand, Zabul — Southern Afghanistan", desc:"Founded Afghanistan's empire in 1747 — among the world's largest at the time", em:"👑",
+    history:`The Durrani tribe — originally called Abdali — became the founding dynasty of the Afghan nation and the most politically dominant Pashtoon confederation in history. Ahmad Shah Abdali renamed them "Durrani" (Pearl of Pearls) when he became king in 1747. The name stuck. From that moment, the Durranis were not just a tribe but the royal clan of a new nation.
+
+The Durrani confederation includes the Popalzai (Ahmad Shah's own sub-tribe), the Barakzai (who later produced the Mohammadzai dynasty), the Alikozai, the Achakzai, and others. Between them, these sub-tribes have provided almost every Afghan king, president, and major political leader from 1747 to the present day. Hamid Karzai was Popalzai Durrani. Many of the leaders of the post-2001 Afghan government were Durrani.
+
+Their heartland — Kandahar — is the spiritual and political capital of Pashtoon Afghanistan. The Durrani motto, essentially, is that they do not fight for kings — they produce kings. This has made them the most politically sophisticated and simultaneously the most internally contentious of all Pashtoon tribes. The civil wars that broke the Durrani Empire in the 19th century were almost entirely between Durrani sub-factions.`,
+    warriors:["Ahmad Shah Durrani (Baba) — founder of Afghanistan, greatest Pashtoon in history", "Shah Shuja Durrani — restored twice, died 1842", "Hamid Karzai — post-Taliban president"]
+  },
+  {
+    nm:"Ghilzai", reg:"Ghazni, Paktia, Logar, Khost, Eastern Afghanistan", desc:"The most numerous Pashtoon tribe — the Hotaki dynasty that conquered Persia arose from their ranks", em:"🔥",
+    history:`The Ghilzai are numerically the largest Pashtoon tribal confederation — and arguably the most historically consequential in terms of military achievement. They inhabit the vast arc from Ghazni to the Pakistani border, through Paktia, Logar, and Khost. Their relationship with the Durrani confederation has been the central political fault line of Afghan history.
+
+The Hotaki dynasty — which produced Mirwais Hotak and his son Mahmud Hotak, who conquered Persia — was Ghilzai. The Taliban movement of the 1990s and 2000s drew the majority of its leadership from Ghilzai tribes, particularly the Hotak and Tokhi sub-tribes. This reflects a pattern: the Ghilzai are historically the outsiders of Afghan politics — powerful enough to win wars, never quite able to hold the throne long enough to institutionalize their rule.
+
+Their territory in Eastern Afghanistan — the rugged mountains of Paktia, Paktika, and Khost — is among the most autonomous in the world. British attempts to control these areas in three Anglo-Afghan Wars failed comprehensively. American and NATO forces encountered the same terrain, the same tribal structures, and the same fierce independence in the post-2001 conflict.`,
+    warriors:["Mirwais Hotak — father of Afghan independence from Persia, 1709", "Mahmud Hotak — conqueror of Isfahan and Persia, 1722", "Jalaluddin Haqqani — founder of Haqqani network, Zadran tribe"]
+  },
+  {
+    nm:"Yusufzai", reg:"Swat, Mardan, Malakand, Dir, Bajaur — Khyber Pakhtunkhwa", desc:"Rulers of the Swat Valley — fierce resistance to both Mughal and British expansion for 300 years", em:"🏔",
+    history:`The Yusufzai — Sons of Joseph — are among the most historically documented Pashtoon tribes. They migrated from Kandahar to the Peshawar plain and Swat Valley in the 15th–16th centuries, displacing the existing population in wars that the Mughal historian Abu'l-Fazl documented in the Ain-i-Akbari. By the time the Mughals consolidated their empire, the Yusufzai occupied some of the most fertile and beautiful land in South Asia.
+
+Their resistance to the Mughals was legendary. Akbar mounted four major military expeditions against the Yusufzai — each one failing to achieve permanent submission. Emperor Akbar's general Man Singh was defeated at the Battle of Malandarai in 1585 by Yusufzai warriors. The Swat Valley remained effectively autonomous throughout the Mughal period.
+
+The British encountered the same resistance. The Malakand Field Force campaigns of 1897 — which the young Winston Churchill reported on as a journalist — were directed primarily against Yusufzai tribes. Churchill wrote admiringly in his memoir that the Pashtoon fighters "are among the most warlike and efficient guerrilla fighters in the world." Swat itself was not formally incorporated into British India until 1895, and even then maintained its own Wali (prince).`,
+    warriors:["Usman Baba — legendary founder of Yusufzai migration to Swat", "Malak Ahmad — led resistance against Mughal general Man Singh, 1585", "Malala Yousafzai — Nobel Laureate, daughter of Swat's Yusufzai people"]
+  },
+  {
+    nm:"Afridi", reg:"Khyber Pass, Tirah Valley, Bara, Peshawar", desc:"Guardians of the Khyber Pass for centuries — every foreign army crossing it paid tribute to the Afridis", em:"⚔️",
+    history:`The Afridi are the lords of the Khyber — the mountain tribe that has controlled the most strategically important pass in Asia for centuries. Every empire from the Mughals to the British to the modern Pakistani state has had to negotiate with, fight, bribe, or work around the Afridi to use the Khyber Pass. None has ever simply conquered them.
+
+The Afridi inhabit the Tirah Valley — a natural fortress of gorges and peaks that was mapped by the British only in the early 20th century, and even then incompletely. This valley was their sanctuary: when pressure came, the Afridi withdrew to Tirah, which no outside force successfully invaded. The British attempted in 1897 during the Tirah Expedition — 35,000 soldiers against the Afridi and Orakzai. They entered, suffered heavy casualties, and withdrew having achieved essentially nothing.
+
+The Afridi relationship with the Khyber is not merely geographic — it is civilizational. They extracted tolls from caravans for centuries. They provided (and also attacked) supply lines. They negotiated from strength because geography gave them permanent tactical advantage. The Khyber Rifles — the famous frontier regiment — was composed primarily of Afridi soldiers, who understood that working with the British was often more profitable than fighting them. But when Pashtoon honor demanded it, they fought with equal effectiveness.`,
+    warriors:["Ajab Khan Afridi — paramount chief who defied British repeatedly in 1880s–1890s", "Mullah Powindah — anti-British resistance leader", "Adam Khan Afridi — legendary warrior-poet of the Khyber"]
+  },
+  {
+    nm:"Khattak", reg:"Nowshera, Karak, Attock — Khyber Pakhtunkhwa", desc:"Home of Khushal Khan Khattak — the warrior-poet who united all Pashtoons against Aurangzeb", em:"📜",
+    history:`The Khattak tribe occupies the strategic triangle between the Indus River, the Kurram River, and the Peshawar-Kohat axis — territory that controlled the main routes between Kabul, the Khyber, and the Punjab plains. This made them indispensable to every power that sought to dominate the frontier: Mughals, Durranis, Sikhs, and British all needed Khattak cooperation or Khattak neutrality.
+
+The tribe is forever associated with Khushal Khan Khattak (1613–1689) — warrior, chieftain, and the greatest poet in Pashto literature. His grandfather Malik Akoray had established the Khattak as the dominant tribe of the Peshawar-Nowshera belt. Khushal inherited this position and transformed it from tribal chieftaincy into something approaching a Pashtoon nationalist leadership.
+
+After his death, the Khattak continued as a significant but no longer dominant force. Their literary tradition — begun by Khushal — continued through his sons and grandsons, several of whom were accomplished poets. The Khattak dialect of Pashto is considered among the most melodious, and their folk music tradition (particularly the Khattak dance) is one of the most distinctive in all of Pashtoon culture. The Khattak dance — energetic, sword-wielding — is often performed at national celebrations as the symbol of Pashtoon martial culture.`,
+    warriors:["Khushal Khan Khattak — warrior-poet, led Grand Pashtoon Alliance against Aurangzeb", "Ashraf Khan Khattak — Khushal's son, also a poet and warrior", "Afzal Khan Khattak — Khushal's son who betrayed him to the Mughals (family tragedy of epic scale)"]
+  },
+  {
+    nm:"Wazir", reg:"North & South Waziristan — FATA/KPK Pakistan", desc:"Among the most fiercely independent tribes — they were never fully subdued by the British Empire", em:"🦅",
+    history:`The Wazir are the dominant tribe of Waziristan — the mountainous territory on the Pakistan-Afghanistan border that became the most ungovernable region in the world during the post-2001 conflict. This is not a recent phenomenon: the Wazir have resisted external authority consistently for centuries.
+
+The British fought more campaigns in Waziristan than in any other part of the frontier. Between 1849 and 1947, they launched over 60 military expeditions into Wazir and Mahsud territory — more than one per year on average. Not one of these expeditions resulted in permanent submission. The British response was to build roads (which the Wazirs attacked), establish garrisons (which the Wazirs besieged), and pay subsidies (which the Wazirs accepted while continuing to resist on their own terms).
+
+The Wazir are divided into two main branches: the Ahmadzai Wazir (who gave their name to Ahmad Shah Wazir, one of the great frontier leaders of the 20th century) and the Mahsud (sometimes counted as a separate tribe). Their territory — the Waziristan hills — is among the most difficult mountain terrain in Asia, giving them permanent tactical advantage against any external force.`,
+    warriors:["Mirza Ali Khan (Faqir of Ipi) — led anti-British resistance from 1936 until 1947 and beyond", "Abdullah Jan Wazir — major 19th century resistance leader", "Jalat Khan — Wazir leader who negotiated with both British and Afghan powers"]
+  },
+  {
+    nm:"Mahsud", reg:"South Waziristan — Tank, Jandola, Sarwakai", desc:"Legendary mountain warriors who resisted every foreign power that entered their territory", em:"🗡️",
+    history:`The Mahsud are widely considered the most militarily capable of all Pashtoon tribes — a distinction earned through centuries of conflict with every power that attempted to control Waziristan. The British had a specific term for fighting the Mahsud: "the most difficult frontier operation possible." General Andrew Skeen, who commanded numerous Waziristan campaigns, wrote that Mahsud fighters were "unsurpassed as individual combatants in the world."
+
+The Mahsud live in South Waziristan, centered on the Tank and Makin areas, in terrain so rugged that even today road travel requires hours for distances of a few kilometers. Their territory is naturally fortified. They have used this geography masterfully across centuries — retreating when confronted by superior force, returning when the force withdraws, never being permanently occupied.
+
+In the post-2001 period, South Waziristan became the central front of the Pakistan Army's counter-terrorism operations. The 2009 Rah-e-Nijat (Path to Salvation) operation was the largest military operation in Pakistani history — involving 35,000 soldiers against Mahsud-dominated areas of South Waziristan. The operation displaced over 400,000 people and took years before any semblance of stability returned. The Mahsud resilience in this conflict echoed every previous encounter with outside forces.`,
+    warriors:["Mehr Dil Khan Mahsud — paramount chief of 19th century", "Shah Mir Khan — led multiple anti-British operations", "Naqeebullah Mehsud — whose extrajudicial killing in 2018 sparked the PTM movement"]
+  },
+  {
+    nm:"Mohmand", reg:"Mohmand Agency, Peshawar Valley, Gosh — KPK/Afghanistan border", desc:"Fierce frontier fighters who participated in all three Anglo-Afghan Wars and multiple uprisings", em:"⚡",
+    history:`The Mohmand tribe occupies the rugged hills north of Peshawar between the Kabul River and the Safed Koh mountain range — territory that controls the northern approach to the Khyber. Like the Afridi to their south, the Mohmand have always been strategically positioned between the Afghan heartland and the Indian plains.
+
+The tribe split by the Durand Line more dramatically than almost any other: Mohmand villages and families straddle the Afghanistan-Pakistan border, with roughly half living in each country. This division has made the Mohmand simultaneously citizens of two states and subjects of neither — maintaining their own jirga system and tribal governance independently of both governments.
+
+The Mohmand participated significantly in the Malakand Field Force campaigns of 1897 — the frontier uprisings that Churchill famously reported on. Their chief Hadda Mullah organized one of the most sustained anti-British movements of the late 19th century, linking tribal resistance to pan-Islamic sentiment and producing a template for later resistance movements. The British conducted seven major operations against the Mohmand between 1879 and 1935.`,
+    warriors:["Hadda Mullah (Najm-ud-Din) — major anti-British resistance leader 1897", "Umra Khan of Jandol — complex frontier leader who played Afghans and British against each other", "Rahman Baba — the great Sufi poet was of Mohmand stock"]
+  },
+  {
+    nm:"Kakar", reg:"Quetta, Pishin, Zhob — Balochistan Province", desc:"Ancient Pashtoon tribe of Balochistan — deep connections to the original Kandahar heartland", em:"🌄",
+    history:`The Kakar are one of the oldest and most widely dispersed Pashtoon tribes, inhabiting the eastern and southern extensions of the Pashtoon world — particularly the Quetta area of Balochistan, Pishin, Zhob, and Loralai. They trace their lineage through the Ghurghusht branch of Pashtoon genealogy, giving them ancient pedigree in the tribal structure.
+
+Quetta — the capital of Balochistan and the Kakar heartland — was historically a stopping point on the great caravan routes connecting Kandahar with the Indus and the Arabian Sea. The Kakars controlled these routes and the surrounding agriculture, particularly in the Pishin Valley which produces some of the finest fruits in Pakistan.
+
+The British recognized Quetta's strategic importance and built a major cantonment there — it became the home of the Staff College (now the Pakistan Army's Command and Staff College) precisely because it sat at the intersection of all southern frontier routes. The Kakar inhabited this strategically vital territory and maintained their tribal identity through both British and Pakistani periods. Their identity spans the Pashtoon-Baloch border zone, making them culturally distinctive.`,
+    warriors:["Mir Ahmad Khan Kakar — major Kakar chief who negotiated with both British and Kandahar", "Sami Ullah Kakar — 19th century resistance leader in Zhob", "Shams Shah Kakar — maintained Kakar autonomy through the British transition"]
+  },
+  {
+    nm:"Shinwari", reg:"Nangarhar, Khyber Pass (eastern approach), Torkham", desc:"Eastern frontier Pashtoons guarding the Torkham crossing — fierce and independent", em:"🏹",
+    history:`The Shinwari tribe inhabits the crucial eastern approaches to the Khyber Pass — the Nangarhar province of Afghanistan and the Afghan side of the Torkham border crossing. If the Afridi own the middle of the Khyber, the Shinwari own its eastern mouth. Every caravan, army, and modern truck crossing into Afghanistan through Torkham passes through Shinwari territory.
+
+Their position made them simultaneously wealthy (through tolls, trade, and smuggling) and perpetually targeted by whatever power wanted to control the Khyber route. They maintained complex relationships with the Durrani state, the British, and later the Pakistani and Afghan governments — extracting advantage from each while yielding permanent sovereignty to none.
+
+The Shinwari uprising of 1928–1929 was one of the most significant events in Afghan internal history. When King Amanullah attempted to modernize Afghanistan rapidly — introducing Western education, limiting the veil, and implementing reforms that clashed with tribal customs — the Shinwari were among the first to revolt. Their rebellion contributed to Amanullah's eventual abdication and the temporary rule of the Tajik bandit-king Habibullah Kalakani. The Shinwari had demonstrated that Pashtoon tribal power could determine the fate of Afghan kings.`,
+    warriors:["Shinwari tribal elders who led 1928 uprising — names largely undocumented in Western sources", "Malik Hamid Khan Shinwari — major chief in the Khyber trading era", "Various anonymous commanders across Anglo-Afghan Wars"]
+  },
+  {
+    nm:"Bangash", reg:"Kurram Valley, Hangu, Kohat — KPK", desc:"Guardians of the Kurram Valley — unique for Shia tradition within Pashtoon culture", em:"🌿",
+    history:`The Bangash tribe of the Kurram Valley holds a unique position in Pashtoon history: they are predominantly Shia Muslim in a predominantly Sunni tribal world. This distinction — which dates to their conversion centuries ago — has made them simultaneously part of and separate from the wider Pashtoon confederacy. Their tribal code is fully Pashtunwali; their religious identity is distinctly their own.
+
+The Kurram Valley — a narrow corridor pointing like a finger at Kabul — was the "Kurram Corridor" that gave the British one of their strategic advantages in the Second Anglo-Afghan War. General Roberts used the Kurram route for his advance toward Kabul in 1878–79. The Bangash, with their distinct identity and their territory's strategic value, navigated these pressures with considerable sophistication.
+
+Their Shia identity created complex dynamics with the broader Pashtoon world, particularly during periods of Sunni religious revivalism in the 19th and 20th centuries. The Kurram Valley saw significant sectarian violence in the 1990s and 2000s — conflict that the Bangash experienced with their dual identity as proud Pashtoons and Shia Muslims. They are a reminder that the Pashtoon world is more religiously diverse than the dominant Sunni narrative suggests.`,
+    warriors:["Mir Ahmad Khan Bangash — major chief during British period", "Various Bangash commanders who navigated Sunni-Shia tensions throughout history", "Bangash scholars who maintained Shia scholarship in a Sunni-dominant environment"]
+  },
+  {
+    nm:"Orakzai", reg:"Orakzai Agency, Tirah mountains — KPK", desc:"Mountain tribe of extraordinary independence — their Tirah valley was never fully mapped by the British", em:"🗻",
+    history:`The Orakzai inhabit the Tirah Valley alongside the Afridi — one of the most impenetrable and least-known territories in South Asia. Their name literally means "Lost Tribe" or "Tribe Without a Tribe" in some interpretations, reflecting their ancient origins and complex genealogical positioning. They trace lineage through the Karlani branch of Pashtoon ancestry.
+
+Uniquely among Pashtoon tribes, the Orakzai are roughly half Sunni and half Shia — a division that has historically been managed through careful jirga politics and tribal solidarity that transcends religious difference. This internal pluralism made them exceptional: a tribe that had worked out coexistence between the sects that have torn apart other communities.
+
+The Tirah Expedition of 1897 was Britain's largest and most expensive frontier military operation — 35,000 troops, enormous logistical effort — directed primarily at the Afridi and Orakzai who had risen in the great frontier uprising of that year. The British entered Tirah, fought continuously, and withdrew having achieved the destruction of some villages but no political settlement. The tribes returned to their valleys and resumed their lives. The British officially declared the expedition a success. No Pashtoon agreed.`,
+    warriors:["Orakzai tribal commanders during 1897 uprising — coordinated with Afridi leaders", "Mixed Sunni-Shia leadership that maintained tribal unity", "Sayid Akbar — Orakzai leader during Second Anglo-Afghan War period"]
+  },
+  {
+    nm:"Hotaki", reg:"Kandahar, Ghazni — Founders of first modern Pashtoon empire", desc:"Founded the Hotaki Empire — their son Mirwais (inspired by mother Nazo Tokhi) changed history", em:"🌟",
+    history:`The Hotaki are a Ghilzai sub-tribe whose 65 years of historical prominence (1709–1738) represent the most dramatic rise and fall in Pashtoon history. From a relatively undistinguished position as one of many Ghilzai sub-groups under Persian Safavid governance, they produced Mirwais Hotak — who overthrew the Persian governor of Kandahar — and his son Mahmud — who conquered Persia itself.
+
+The Hotaki Empire at its peak (1722–1729) stretched from Kandahar to Isfahan, controlling both Afghanistan and the Iranian plateau. It was the largest Pashtoon empire until Ahmad Shah Durrani's even greater achievement in 1747. The Hotaki period proved definitively that the Pashtoon were not merely mountain fighters but empire builders capable of projecting power across entire regions.
+
+The dynasty's collapse came as rapidly as its rise. Mahmud Hotak's mental deterioration, Persian military revival under Nader Afshar, and the inherent difficulty of ruling a sophisticated Persian bureaucracy with a tribal Pashtoon power structure proved fatal. By 1738, Nader Shah had retaken all Hotaki territory. But the Hotaki legacy — the proof that Pashtoons could build empires — inspired Ahmad Shah Abdali just nine years later, when he founded the Durrani Empire with the former Hotaki soldiers in his ranks.`,
+    warriors:["Mirwais Hotak — killed Persian governor, founded Hotaki dynasty 1709", "Mahmud Hotak — conquered Isfahan and Persia 1722", "Ashraf Hotak — last Hotaki ruler of Persia, defeated by Nader Shah 1729"]
+  }
+];
+
+function buildTribes() {
+  document.getElementById('tribesGrid').innerHTML = TRIBES.map(t => `
+    <div class="tribe-card" onclick="openTribe('${t.nm}')">
+      <span class="tribe-em">${t.em}</span>
+      <div class="tribe-name">${t.nm}</div>
+      <div class="tribe-region">📍 ${t.reg}</div>
+      <div class="tribe-desc">${t.desc}</div>
+      <div class="tribe-cta">Click for full history →</div>
+    </div>
+  `).join('');
+}
+
+function openTribe(name) {
+  const t = TRIBES.find(x => x.nm === name);
+  if (!t) return;
+  const modal = document.getElementById('tribeModal');
+  const body = document.getElementById('tribeModalBody');
+  modal.classList.add('on');
+  document.body.style.overflow = 'hidden';
+
+  const histParas = t.history.trim().split('\n\n');
+  body.innerHTML = `
+    <div style="font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.35em;color:var(--gold3);margin-bottom:0.5rem">TRIBE ENCYCLOPEDIA</div>
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem">
+      <span style="font-size:3rem">${t.em}</span>
+      <div>
+        <div style="font-family:'Cinzel Decorative',serif;font-size:1.8rem;color:var(--gold)">${t.nm}</div>
+        <div style="font-size:0.85rem;color:var(--dust);font-style:italic">📍 ${t.reg}</div>
+      </div>
+    </div>
+    <div style="color:var(--dust);line-height:1.95;font-size:1rem">
+      ${histParas.map(p=>`<p style="margin-bottom:1.2rem;color:var(--dust);line-height:1.95;font-size:1rem">${p.trim()}</p>`).join('')}
+    </div>
+    ${t.warriors ? `
+      <div style="margin-top:1.5rem;padding:1.5rem;background:rgba(200,168,75,0.05);border-left:2px solid var(--gold3)">
+        <div style="font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold3);margin-bottom:0.75rem">NOTABLE HISTORICAL FIGURES</div>
+        ${t.warriors.map(w=>`<div style="color:var(--ash);line-height:1.8;font-size:0.92rem;margin-bottom:0.4rem">⚔️ ${w}</div>`).join('')}
+      </div>
+    ` : ''}
+  `;
+}
+
+function closeModal() {
+  document.getElementById('tribeModal').classList.remove('on');
+  document.body.style.overflow = '';
+}
+document.getElementById('tribeModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+// ══════════════════════════════════════════════
+// TRIBAL ORG CHART — FULL GENEALOGICAL TREE
+// ══════════════════════════════════════════════
+const ORG_DATA = {
+  root: { nm:"Qais Abdur Rashid", sub:"Legendary Ancestor of All Pashtoons · ~630 CE", em:"🌟", branch:"root",
+    info:"According to Pashtoon genealogical tradition (Shajra), Qais Abdur Rashid was the legendary ancestor of all Pashtoons. He lived on Mount Sulaiman and traveled to Medina to meet the Prophet's companions. He embraced Islam and returned to his people, transforming their identity forever. His three sons — Sarban, Bitan, and Ghurghusht — became the progenitors of all major Pashtoon tribal confederacies. A fourth branch, Karlani, is also recognized." },
+  branches: [
+    { nm:"SARBAN", sub:"First Branch — Most Noble", em:"👑", branch:"sarban",
+      info:"Sarban was the eldest son of Qais Abdur Rashid. From him descend the most politically powerful Pashtoon tribal confederacies, including the Durrani and the Yusufzai. The Sarban branch is traditionally considered the most senior in Pashtoon genealogy." },
+    { nm:"BITAN (BETAN)", sub:"Second Branch", em:"⚔️", branch:"bitan",
+      info:"Bitan (also called Betan) was the second son of Qais Abdur Rashid. From him descend the Ghilzai confederation — the numerically largest Pashtoon tribal group, including the Hotaki, Tokhi, and dozens of other tribes." },
+    { nm:"GHURGHUSHT", sub:"Third Branch", em:"🌿", branch:"ghurghusht",
+      info:"Ghurghusht was the third son of Qais Abdur Rashid. From him descend the Kakar, Safi, Wardak, and several other important tribal confederacies, particularly strong in eastern and southeastern Afghanistan." },
+    { nm:"KARLANI", sub:"Fourth Branch — Disputed Origin", em:"🏔", branch:"karlani",
+      info:"The Karlani branch has disputed origins in Pashtoon genealogy — some traditions say Karlan was a son of Qais, others that he was adopted into the lineage. Regardless, the Karlani tribes are fully Pashtoon and include some of the fiercest and most independent tribes: Wazir, Mahsud, Afridi, Khattak, Bangash, Orakzai, and Mohmand." }
+  ],
+  tribes: {
+    sarban: [
+      { nm:"Durrani (Abdali)", sub:"Kandahar · Founded Afghanistan 1747", em:"👑",
+        info:"The Durrani confederation includes the Popalzai, Barakzai, Alikozai, Achakzai, Nurzai, and Ishaqzai. Ahmad Shah Durrani (Abdali) renamed them 'Durrani' when he founded Afghanistan. They have provided most of Afghanistan's rulers from 1747 to the present." },
+      { nm:"Yusufzai", sub:"Swat & Peshawar · Sons of Joseph", em:"🏔",
+        info:"The Yusufzai migrated from Kandahar to the Peshawar plain and Swat Valley in the 15th-16th centuries. They include the Mandar and Yusuf sub-groups. They resisted Mughal authority for over a century and remain one of the most numerous tribes in KPK." },
+      { nm:"Mohmand", sub:"Peshawar border area", em:"⚡",
+        info:"The Mohmand inhabit the hills north of Peshawar and the Afghan border areas. Rahman Baba, the greatest Pashto poet, was of Mohmand stock. They participated in all three Anglo-Afghan Wars." },
+      { nm:"Khalil", sub:"Peshawar city surroundings", em:"🏙️",
+        info:"The Khalil tribe has historically inhabited the Peshawar city area and was prominent in the city's commercial and political life during the Mughal and British periods." },
+      { nm:"Tarakzai", sub:"Mohmand Agency", em:"🌿",
+        info:"The Tarakzai are a major sub-tribe of the Mohmand confederation, inhabiting the Mohmand Agency area." }
+    ],
+    bitan: [
+      { nm:"Ghilzai", sub:"Eastern Afghanistan · Most Numerous", em:"🔥",
+        info:"The Ghilzai are the largest Pashtoon confederation, including Hotaki, Tokhi, Suleiman Khel, Andar, Taraki, Kakar (some branches), and dozens more. They historically formed the political opposition to the Durrani in Afghan politics." },
+      { nm:"Hotaki", sub:"Kandahar · Founders of 1st Empire", em:"🌟",
+        info:"The Hotaki are a Ghilzai sub-tribe. Mirwais Hotak founded the Hotaki Empire in 1709 after killing the Persian governor. His son Mahmud conquered Isfahan in 1722. Their military achievement remains the greatest in Ghilzai history." },
+      { nm:"Tokhi", sub:"Kandahar · Family of Nazo Tokhi", em:"📜",
+        info:"The Tokhi are a Ghilzai sub-tribe famous for Nazo Tokhi — the founding poetess of Pashto literature and mother of Mirwais Hotak. She is called 'Madar-e-Afghan' (Mother of Afghanistan)." },
+      { nm:"Suleiman Khel", sub:"Ghazni & Kandahar areas", em:"🗺️",
+        info:"The Suleiman Khel are one of the larger Ghilzai sub-tribes, historically nomadic (Kuchi) and inhabiting a wide range from Ghazni to Kandahar and beyond." },
+      { nm:"Taraki", sub:"Ghazni · Famous in 20th century", em:"⚡",
+        info:"The Taraki are a Ghilzai sub-tribe. Nur Muhammad Taraki — the communist leader who triggered the 1978 revolution — was of Taraki tribe." },
+      { nm:"Andar", sub:"Ghazni province", em:"🏔",
+        info:"The Andar are a significant Ghilzai sub-tribe inhabiting Ghazni province, historically agricultural and warrior-farming communities." }
+    ],
+    ghurghusht: [
+      { nm:"Kakar", sub:"Balochistan · Ancient & widespread", em:"🌄",
+        info:"The Kakar are one of the most geographically spread Pashtoon tribes, inhabiting Quetta, Pishin, Zhob, and extending into southern Afghanistan. They trace to the Ghurghusht branch." },
+      { nm:"Safi", sub:"Kunar, Bajaur, Laghman", em:"💫",
+        info:"The Safi are an important eastern Pashtoon tribe on the Afghan side, known for fierce independence and control of the Kunar River valley area." },
+      { nm:"Wardak", sub:"Wardak province · Kabul approaches", em:"🗡️",
+        info:"The Wardak tribe inhabits Wardak province southwest of Kabul — strategically positioned on the approaches to the Afghan capital. They have been significant in every Afghan conflict." },
+      { nm:"Achakzai", sub:"Chaman, Spin Boldak · Durand Line", em:"🏜️",
+        info:"The Achakzai straddle the Pakistan-Afghanistan border south of Kandahar, particularly around Chaman and Spin Boldak. Their territory sits astride the main Quetta-Kandahar road." },
+      { nm:"Nurzai", sub:"Helmand, Kandahar, Farah", em:"🌿",
+        info:"The Nurzai are a major tribal group in Helmand and Kandahar provinces, with a large population that has been central to both traditional agriculture and modern conflict in Helmand." }
+    ],
+    karlani: [
+      { nm:"Wazir", sub:"North & South Waziristan", em:"🦅",
+        info:"The Wazir inhabit both North and South Waziristan. They are divided into Ahmadzai and other sub-groups. Never fully subdued by the British, they remain among the most independent Pashtoon tribes." },
+      { nm:"Mahsud", sub:"South Waziristan · Tank area", em:"🗡️",
+        info:"Often considered a separate tribe from the Wazir, the Mahsud of South Waziristan are considered by military historians as among the most capable guerrilla fighters in history. They resisted the British in over 60 expeditions." },
+      { nm:"Afridi", sub:"Khyber Pass · Tirah Valley", em:"⚔️",
+        info:"Lords of the Khyber Pass. The Afridi include the Adam Khel, Qambarkhel, Zakakhel, and other sub-groups. They have controlled the Khyber and the Tirah Valley for centuries, extracting tribute from every empire that used the pass." },
+      { nm:"Khattak", sub:"Nowshera · Khushal's people", em:"📜",
+        info:"Home of the greatest Pashtoon warrior-poet Khushal Khan Khattak. Their strategic position between the Indus and the Khyber made them crucial to Mughal frontier control. Their Khattak dance is a national symbol." },
+      { nm:"Bangash", sub:"Kurram Valley · Unique Shia identity", em:"🌿",
+        info:"The Bangash of Kurram Valley are unique among Pashtoon tribes in being predominantly Shia Muslim. They are fully Pashtoon in culture and Pashtunwali practice, but their distinct religious identity has shaped their history." },
+      { nm:"Orakzai", sub:"Tirah mountains · 'Lost Tribe'", em:"🗻",
+        info:"The Orakzai inhabit Tirah alongside the Afridi. Uniquely, they are roughly half Sunni and half Shia — a division managed through their jirga system. Their valley was never fully mapped by the British." },
+      { nm:"Mohmand (some)", sub:"Shared with Sarban branch", em:"⚡",
+        info:"Some genealogical traditions place the Mohmand in the Karlani branch rather than Sarban. This reflects the complexity of Pashtoon genealogy and the contested nature of some tribal origins." },
+      { nm:"Tori", sub:"Kurram Valley · Shia Pashtoon", em:"🌿",
+        info:"The Tori are another Shia Pashtoon tribe of the Kurram Valley, closely related to and allied with the Bangash in managing the complex sectarian dynamics of the region." },
+      { nm:"Zazi (Jadran)", sub:"Paktia, Khost · Eastern mountains", em:"🏔",
+        info:"The Zazi (also called Jadran) are an eastern Afghan tribal group of great independence, inhabiting Paktia and Khost provinces. Jalaluddin Haqqani was of Zadran (Zazi) tribe." }
+    ]
+  }
+};
+
+let curOrgFilter = 'all';
+let curOrgNode = null;
+
+function buildOrgChart() {
+  const root = document.getElementById('orgRoot');
+  const { root: r, branches, tribes } = ORG_DATA;
+
+  let html = '';
+  // Root node
+  html += `<div class="org-connector" style="height:0"></div>`;
+  html += `<div class="org-row"><div class="org-node root-node" onclick="showOrgDetail('root')" id="orgn-root">
+    <span class="org-node-em">${r.em}</span>
+    <div class="org-node-name">${r.nm}</div>
+    <div class="org-node-sub">${r.sub}</div>
+  </div></div>`;
+  html += `<div class="org-connector" style="height:30px"></div>`;
+
+  // Branch tier
+  html += `<div class="org-tier-label">Four Great Branches</div>`;
+  html += `<div class="org-row" id="orgBranchRow">`;
+  branches.forEach(b => {
+    const hide = curOrgFilter !== 'all' && curOrgFilter !== b.branch ? 'style="opacity:0.25;pointer-events:none"' : '';
+    html += `<div class="org-node" ${hide} onclick="showOrgDetail('${b.branch}')" id="orgn-${b.branch}">
+      <span class="org-node-em">${b.em}</span>
+      <div class="org-node-name">${b.nm}</div>
+      <div class="org-node-sub">${b.sub}</div>
+    </div>`;
+  });
+  html += `</div>`;
+  html += `<div class="org-connector" style="height:30px"></div>`;
+
+  // Tribe tiers per branch
+  const branchOrder = ['sarban','bitan','ghurghusht','karlani'];
+  branchOrder.forEach(branch => {
+    if (curOrgFilter !== 'all' && curOrgFilter !== branch) return;
+    const tribeList = ORG_DATA.tribes[branch];
+    const branchInfo = branches.find(b => b.branch === branch);
+    html += `<div class="org-tier-label" style="color:var(--gold)">${branchInfo.nm} Tribes</div>`;
+    html += `<div class="org-row" style="flex-wrap:wrap;gap:0.6rem;max-width:1100px;margin:0 auto 0.5rem">`;
+    tribeList.forEach((t, i) => {
+      html += `<div class="org-node" style="min-width:120px;max-width:150px" onclick="showOrgDetail('tribe_${branch}_${i}')" id="orgn-tribe_${branch}_${i}">
+        <span class="org-node-em" style="font-size:1rem">${t.em}</span>
+        <div class="org-node-name" style="font-size:0.55rem">${t.nm}</div>
+        <div class="org-node-sub" style="font-size:0.62rem">${t.sub}</div>
+      </div>`;
+    });
+    html += `</div>`;
+    html += `<div class="org-connector" style="height:20px"></div>`;
+  });
+
+  root.innerHTML = html;
+}
+
+function showOrgDetail(id) {
+  // Highlight node
+  document.querySelectorAll('.org-node').forEach(n => n.classList.remove('on'));
+  const el = document.getElementById(`orgn-${id}`);
+  if (el) el.classList.add('on');
+
+  let data = null;
+  if (id === 'root') {
+    data = ORG_DATA.root;
+  } else if (ORG_DATA.branches.find(b => b.branch === id)) {
+    data = ORG_DATA.branches.find(b => b.branch === id);
+  } else if (id.startsWith('tribe_')) {
+    const parts = id.split('_');
+    const branch = parts[1];
+    const idx = parseInt(parts[2]);
+    data = ORG_DATA.tribes[branch][idx];
+  }
+
+  if (!data) return;
+  const panel = document.getElementById('orgDetail');
+  panel.classList.add('on');
+  panel.innerHTML = `
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+      <span style="font-size:2.5rem">${data.em}</span>
+      <div>
+        <div class="org-detail-title">${data.nm}</div>
+        <div class="org-detail-sub">${data.sub}</div>
+      </div>
+    </div>
+    <div class="org-detail-body">${data.info}</div>
+  `;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function filterOrg(filter, btn) {
+  document.querySelectorAll('.org-filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  curOrgFilter = filter;
+  buildOrgChart();
+}
+
+// ══════════════════════════════════════════════
+// CHAT — BACKEND ONLY
+// ══════════════════════════════════════════════
+let chatHistory = [];
+
+async function sendChat() {
+  const inp = document.getElementById('chatInp');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  document.getElementById('sendBtn').disabled = true;
+  addMsg('user', msg);
+  addMsg('ai', loader(), true);
+  chatHistory.push({ role:'user', content: msg });
+
+  try {
+    const r = await fetch(`${API_BASE}/api/chat`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ message: msg, history: chatHistory.slice(-10) })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.detail || 'Chat failed');
+    document.getElementById('chatMsgs').lastChild.remove();
+    addMsg('ai', d.response);
+    chatHistory.push({ role:'assistant', content: d.response });
+  } catch(e) {
+    document.getElementById('chatMsgs').lastChild.remove();
+    addMsg('ai', `<span style="color:var(--danger)">Error: ${e.message}. Make sure your backend is running at ${API_BASE}</span>`);
+  }
+  document.getElementById('sendBtn').disabled = false;
+}
+
+function addMsg(role, html, raw = false) {
+  const msgs = document.getElementById('chatMsgs');
+  const d = document.createElement('div');
+  d.className = `msg ${role}`;
+  const text = raw ? html : html.replace(/\n\n/g,'<br><br>').replace(/\n/g,' ');
+  d.innerHTML = `<div class="msg-bubble">${text}</div>`;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function useSug(btn) {
+  document.getElementById('chatInp').value = btn.textContent.trim();
+  sendChat();
+}
+
+// ══════════════════════════════════════════════
+// IDENTITY CARD — BACKEND ONLY
+// ══════════════════════════════════════════════
+async function genIdentity() {
+  const name   = document.getElementById('idName').value.trim() || 'Ahmad';
+  const tribe  = document.getElementById('idTribe').value.trim() || 'Yusufzai';
+  const region = document.getElementById('idRegion').value.trim() || 'Peshawar';
+  const card   = document.getElementById('idCard');
+  card.innerHTML = `<div style="text-align:center;padding:3rem">${loader()}<div style="margin-top:1rem;color:var(--dust);font-style:italic;font-size:0.9rem">Consulting the ancestors...</div></div>`;
+
+  try {
+    const r = await fetch(`${API_BASE}/api/identity`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ name, tribe, region })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.detail || 'Identity generation failed');
+
+    card.innerHTML = `
+      <div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border2)">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,var(--gold3),var(--gold));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0">🦅</div>
+        <div>
+          <div style="font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--gold)">${name}</div>
+          <div style="font-size:0.85rem;color:var(--dust);font-style:italic">${tribe} Tribe · ${region}</div>
+        </div>
+      </div>
+      ${[
+        ['⚔️ Tribal Legacy', d.tribal_legacy],
+        ['🌟 Ancestral Warriors', d.ancestral_warriors],
+        ['⚖️ Your Pashtunwali Spirit', d.pashtunwali_spirit],
+        ['🗺️ Ancient Homeland', d.ancient_homeland],
+        ['📜 Historical Moment', d.historical_moment || d.historical_connection],
+      ].map(([label, val]) => val ? `
+        <div style="margin-bottom:1.3rem">
+          <div style="font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--gold3);margin-bottom:0.4rem">${label}</div>
+          <div style="color:var(--ash);line-height:1.8;font-size:0.95rem">${val}</div>
+        </div>
+      ` : '').join('')}
+      <div style="margin-top:1.5rem;background:rgba(200,168,75,0.05);border-left:2px solid var(--gold);padding:1.3rem">
+        <div style="font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--gold3);margin-bottom:0.6rem">🕊️ MESSAGE FROM YOUR ANCESTORS</div>
+        <div style="font-style:italic;color:var(--white);line-height:1.85">"${d.message_from_ancestors || ''}"</div>
+      </div>
+    `;
+  } catch(e) {
+    card.innerHTML = `<div style="padding:2rem;color:var(--danger);line-height:1.9">Error: ${e.message}<br><br><span style="color:var(--dust)">Make sure your backend is running at ${API_BASE} and your GEMINI_API_KEY is set in backend/.env</span></div>`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// ON THIS DAY — HARDCODED ENCYCLOPEDIA ENTRIES
+// ══════════════════════════════════════════════
+const TODAY_EVENTS = [
+  { months:[1], days:[6], year:"1842", headline:"The Great Disaster — British Army Annihilated in the Khyber Pass",
+    story:"On January 6, 1842, the British garrison of Kabul — 4,500 soldiers and 12,000 camp followers — began their fatal retreat. Promised safe passage, they were ambushed in the mountain passes by Ghilzai Pashtoon warriors. Seven days later, only one European, Dr. William Brydon, reached Jalalabad alive. 'I am the army,' he reportedly said.\n\nThe massacre became the most famous military disaster in British imperial history. It proved that Afghanistan — and the Pashtoon people specifically — could defeat the most powerful empire on earth. The lesson was forgotten. It had to be learned again in 1878, 1919, and beyond.",
+    sig:"The defeat that taught the world: Pashtoons cannot be conquered, only negotiated with." },
+  { months:[5], days:[19], year:"1839", headline:"British Army of the Indus Crosses the Bolan Pass — The Great Game Begins",
+    story:"The invasion of Afghanistan by the East India Company marked the opening of the Great Game — the strategic competition between Britain and Russia for dominance in Central Asia. The Pashtoon people became the human terrain of this imperial rivalry.\n\nBritain installed Shah Shuja, their preferred candidate, in Kabul. The Pashtoon tribes watched, waited, and prepared their response. The silence of a calculating people was mistaken for submission.",
+    sig:"The beginning of 180 years of Pashtoon resistance to foreign powers on their soil." },
+  { months:[10], days:[1], year:"1747", headline:"Ahmad Shah Durrani Crowned King — Afghanistan Is Born",
+    story:"Following the Loya Jirga of Kandahar in 1747, Ahmad Shah Abdali — 25 years old — was crowned with wheat stalks placed on his head by the Sufi elder Sabir Shah. No gold crown. The earth of Kandahar itself was his coronation symbol. He renamed his people Durrani — Pearl of Pearls — and began building what would become the largest empire in the world.\n\nWithin years, his empire stretched from Khorasan to Kashmir, from the Oxus to the Arabian Sea. No Pashtoon before or after has built anything comparable.",
+    sig:"The founding of Afghanistan — the only state in history built by Pashtoon people." },
+  { months:[1], days:[14], year:"1761", headline:"Battle of Panipat — Ahmad Shah Crushes the Maratha Confederacy",
+    story:"On January 14, 1761, the most decisive battle in 18th century South Asian history was fought on the plains of Panipat. Ahmad Shah Durrani's 60,000 Pashtoon cavalry — patient, disciplined, positioned perfectly — struck the exhausted Maratha army of 300,000. Within hours, 28,000 Marathas lay dead.\n\nThe Maratha Peshwa's son died in the first assault. Panic followed. The Pashtoon horsemen pursued for miles. The battle ended Muslim political dominance of North India for another generation.",
+    sig:"The day Pashtoon military power reached its greatest strategic expression." },
+  { months:[8], days:[19], year:"1919", headline:"Treaty of Rawalpindi — Afghanistan Defeats Britain for the Third Time",
+    story:"The Treaty of Rawalpindi of August 19, 1919 granted Afghanistan full sovereignty over its foreign policy — ending 40 years of British 'guidance.' Amanullah Khan had gambled on the Third Anglo-Afghan War and won. The British, exhausted from the First World War and facing Indian nationalist pressure at home, could not sustain another frontier war.\n\nAfghanistan became the first country to defeat Britain in the 20th century. Within months, Amanullah was exchanging ambassadors with the Soviet Union, Turkey, and France — demonstrating full sovereign independence.",
+    sig:"Afghanistan's declaration of independence — achieved on the battlefield, not the negotiating table." },
+];
+
+function buildTodayDate() {
+  const d = new Date();
+  const s = d.toLocaleDateString('en-US', { month:'long', day:'numeric' });
+  document.getElementById('todayDateBadge').textContent = s.toUpperCase() + ' — ON THIS DAY IN PASHTOON HISTORY';
+
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+
+  const match = TODAY_EVENTS.find(e =>
+    e.months.includes(month) && e.days.includes(day)
+  );
+
+  const useEvent = match || TODAY_EVENTS[Math.floor(Math.random() * TODAY_EVENTS.length)];
+
+  const storyParas = useEvent.story.split('\n\n');
+  document.getElementById('todayContent').innerHTML = `
+    <div class="today-card">
+      <div class="today-year-bg">${useEvent.year}</div>
+      <div style="font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold3);margin-bottom:1rem">${s.toUpperCase()} · ${useEvent.year}</div>
+      <div class="today-headline">${useEvent.headline}</div>
+      ${storyParas.map(p => `<div class="today-story">${p}</div>`).join('')}
+      <div class="today-sig">
+        <span class="today-sig-label">WHY IT MATTERS TODAY</span>
+        ${useEvent.sig}
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+(function init() {
+  buildTimeline();
+  buildPoets();
+  buildPW();
+  buildTribes();
+  buildOrgChart();
+  buildTodayDate();
+})();
+</script>
+</body>
+</html>
