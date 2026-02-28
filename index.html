@@ -506,7 +506,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
   <div class="footer-brand">PUKHTANA</div>
   <div>Open-source Pashtoon cultural platform · Built with pride for the community</div>
   <div class="footer-links">
-    <a href="https://github.com/hamidkhanseditsid-eng" target="_blank">GitHub</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
     <a href="#">Contribute</a>
     <a href="#">About</a>
   </div>
@@ -1373,7 +1373,11 @@ async function sendChat() {
     chatHistory.push({ role:'assistant', content: d.response });
   } catch(e) {
     document.getElementById('chatMsgs').lastChild.remove();
-    addMsg('ai', `<span style="color:var(--danger)">Error: ${e.message}. Make sure your backend is running at ${API_BASE}</span>`);
+    addMsg('ai', `
+  <strong>Ustaz Ahmad is unavailable right now.</strong><br><br>
+  Please try again in a moment.
+`, true);
+console.error('Chat API error:', e);
   }
   document.getElementById('sendBtn').disabled = false;
 }
@@ -1438,7 +1442,17 @@ async function genIdentity() {
       </div>
     `;
   } catch(e) {
-    card.innerHTML = `<div style="padding:2rem;color:var(--danger);line-height:1.9">Error: ${e.message}<br><br><span style="color:var(--dust)">Make sure your backend is running at ${API_BASE} and your GEMINI_API_KEY is set in backend/.env</span></div>`;
+    card.innerHTML = `
+  <div style="padding:2rem;line-height:1.9;color:var(--ash)">
+    <div style="font-family:'Cinzel Decorative',serif;font-size:0.8rem;color:var(--gold);margin-bottom:0.75rem">
+      Identity Card Unavailable
+    </div>
+    <div style="color:var(--dust)">
+      We couldn’t generate your identity card right now. Please try again in a moment.
+    </div>
+  </div>
+`;
+console.error('Identity API error:', e);
   }
 }
 
